@@ -1,0 +1,52 @@
+@use "../variables" as *;
+
+.badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: $radius-sm;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.bg-success {
+  background: rgba($theme-success, 0.22) !important;
+  color: $theme-success !important;
+  border: 1px solid rgba($theme-success, 0.28);
+}
+
+.bg-secondary {
+  background: rgba($theme-muted, 0.22) !important;
+  color: $theme-muted !important;
+  border: 1px solid rgba($theme-muted, 0.28);
+}
+
+.bg-info {
+  background: rgba($theme-secondary, 0.22) !important;
+  color: $theme-secondary !important;
+  border: 1px solid rgba($theme-secondary, 0.28);
+}
+
+.bg-danger {
+  background: rgba($theme-danger, 0.18) !important;
+  color: $theme-danger !important;
+  border: 1px solid rgba($theme-danger, 0.28);
+}
+
+.bg-warning,
+.badge.bg-warning {
+  background: rgba($theme-warning, 0.22) !important;
+  color: $theme-heading !important;
+  border: 1px solid rgba($theme-warning, 0.28);
+}
+
+.badge.bg-success {
+  color: $theme-success !important;
+}
+
+.badge.bg-info {
+  color: $theme-secondary !important;
+}
+
+.badge.bg-danger,
+.badge.bg-secondary {
+  color: $theme-text-on-surface !important;
+}

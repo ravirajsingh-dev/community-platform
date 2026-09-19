@@ -1,0 +1,13 @@
+const MAX_IMAGE_SIZE_MB = 5;
+const MAX_IMAGE_SIZE_BYTES = MAX_IMAGE_SIZE_MB * 1024 * 1024;
+const MAX_GALLERY_BULK_UPLOAD = 20;
+const MAX_NEWS_IMAGES = 20;
+
+module.exports = {
+  MAX_IMAGE_SIZE_MB,
+  MAX_IMAGE_SIZE_BYTES,
+  MAX_GALLERY_BULK_UPLOAD,
+  MAX_NEWS_IMAGES,
+  IMAGE_SIZE_ERROR: `Image size must be less than ${MAX_IMAGE_SIZE_MB}MB`,
+  LOGO_SIZE_ERROR: `Logo size must be less than ${MAX_IMAGE_SIZE_MB}MB`,
+};

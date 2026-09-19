@@ -1,0 +1,196 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ============================================
+// MODALS
+// ============================================
+
+.modal-content {
+  border-radius: $radius-lg;
+  border: 1px solid rgba($theme-primary, 0.14);
+  box-shadow: $shadow-card;
+  background: linear-gradient(
+    180deg,
+    rgba($theme-bg, 0.98) 0%,
+    rgba($surface-alpha-deep, 0.96) 100%
+  );
+  color: $theme-text;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba($theme-primary, 0.14);
+  padding: 1.25rem 1.5rem;
+
+  .modal-title {
+    font-weight: 600;
+    color: $theme-heading;
+    font-size: 1.25rem;
+  }
+
+  .btn-close {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+  color: $theme-text;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba($theme-primary, 0.14);
+  padding: 1rem 1.5rem;
+}
+
+.common-modal {
+  .modal-content {
+    background: linear-gradient(
+      180deg,
+      $theme-bg,
+      $surface-alpha-deep
+    ) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid $theme-alpha-strong;
+    color: $theme-text;
+    overflow: hidden;
+  }
+
+  .common-modal-header {
+    position: relative;
+    background-color: $theme-bg;
+    border-bottom: 1px solid $theme-alpha-mid;
+    padding: 1.5rem 3.5rem 1.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .btn-close {
+      position: absolute;
+      top: 50%;
+      right: 1.15rem;
+      z-index: 2;
+      margin: 0;
+      padding: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+      opacity: 1;
+      transform: translateY(-50%);
+      background-size: 1.35rem;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{color-to-url($theme-primary)}'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+      filter: none;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+      &:focus {
+        opacity: 1;
+        box-shadow: 0 0 0 0.2rem rgba($theme-primary, 0.35);
+      }
+    }
+  }
+
+  .common-modal-title {
+    color: $theme-primary;
+    font-size: 1.8rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .common-modal-icon {
+    color: $theme-primary;
+    font-size: 2.5rem;
+    line-height: 1;
+
+    &.is-success {
+      color: $theme-success;
+    }
+
+    &.is-warning {
+      color: $theme-warning;
+    }
+
+    &.is-danger {
+      color: $theme-danger;
+    }
+  }
+
+  .common-modal-body {
+    color: $theme-heading;
+    font-size: 1.0625rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: $theme-surface;
+
+    &--start {
+      text-align: left;
+      color: $theme-text;
+    }
+  }
+
+  .common-modal-footer {
+    background: transparent !important;
+    border-top: 1px solid $theme-alpha-mid;
+    padding: 1.25rem 1.5rem 1.5rem;
+
+    .btn {
+      min-height: 3rem;
+    }
+  }
+}
+
+.settings-confirm-modal {
+  .common-modal-title {
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+    line-height: 1.25;
+  }
+
+  .common-modal-body {
+    p {
+      font-size: 1.075rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.donation-detail-panel {
+  border: 1px solid $theme-alpha-mid;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: rgba($theme-bg, 0.35);
+}
+
+.donation-detail-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid $theme-alpha-soft;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__label {
+    flex: 0 0 140px;
+    color: $theme-muted;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &__value {
+    flex: 1 1 180px;
+    color: $theme-text;
+    font-size: 0.9375rem;
+    word-break: break-word;
+  }
+}

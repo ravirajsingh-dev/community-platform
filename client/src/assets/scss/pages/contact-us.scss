@@ -1,0 +1,268 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// CONTACT US — footer-inspired, polished (no heavy divider lines)
+// =============================================================================
+
+.contact-us-page {
+  position: relative;
+  min-height: 60vh;
+  color: $theme-text;
+  text-align: center;
+  background:
+    radial-gradient(
+      ellipse 70% 80% at 50% 0%,
+      rgba($theme-primary, 0.14),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      rgba($theme-bg, 0.98),
+      rgba($theme-surface, 0.94)
+    );
+}
+
+.contact-us-hero {
+  padding: clamp(2.5rem, 6vw, 4rem) 1.25rem clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.contact-us-hero__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+
+  &::after {
+    content: "";
+    display: block;
+    width: clamp(48px, 12vw, 72px);
+    height: 2px;
+    margin: clamp(1.15rem, 3vw, 1.5rem) auto 0;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($theme-primary, 0.55),
+      rgba($theme-secondary, 0.65),
+      transparent
+    );
+  }
+}
+
+.contact-us-hero__title {
+  font-size: clamp(1.75rem, 4.5vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: $theme-heading;
+  margin: 0 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.contact-us-hero__intro {
+  margin: 0 auto;
+  max-width: 34rem;
+  font-size: clamp(0.9375rem, 2vw, 1.02rem);
+  line-height: 1.7;
+  color: $theme-muted;
+}
+
+.contact-us-name {
+  margin: 0 auto;
+  padding: 0 1.25rem clamp(0.35rem, 1.5vw, 0.65rem);
+  max-width: 36rem;
+  color: $theme-primary;
+  font-size: clamp(0.9rem, 2.2vw, 1rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+}
+
+.contact-us-body {
+  padding: 0 1.25rem clamp(2.75rem, 6vw, 4rem);
+}
+
+.contact-us-connect {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.35rem, 3.5vw, 1.85rem);
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: clamp(0.5rem, 2vw, 0.85rem) 0 0;
+}
+
+.contact-us-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.contact-us-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $theme-primary;
+}
+
+.contact-us-phones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: clamp(0.9rem, 2.2vw, 0.97rem);
+  line-height: 1.5;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem 0.85rem;
+  }
+}
+
+.contact-us-phone-sep {
+  display: none;
+  color: rgba($theme-primary, 0.45);
+  font-weight: 300;
+  user-select: none;
+  line-height: 1;
+
+  @media (min-width: 480px) {
+    display: inline;
+  }
+}
+
+.contact-us-email,
+.contact-us-address,
+.contact-us-hours {
+  margin: 0;
+  max-width: 100%;
+  font-size: clamp(0.9rem, 2.2vw, 0.97rem);
+  line-height: 1.6;
+  color: rgba($theme-text, 0.9);
+}
+
+.contact-us-text {
+  color: rgba($theme-text, 0.9);
+}
+
+.contact-us-link {
+  color: rgba($theme-text, 0.9);
+  text-decoration: none;
+  @include transition(0.22s);
+
+  &:hover {
+    color: $theme-secondary;
+  }
+
+  &--plain {
+    word-break: break-word;
+  }
+}
+
+.contact-us-copy-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem 0.35rem;
+  max-width: 100%;
+}
+
+.contact-us-copy-btn {
+  flex-shrink: 0;
+  line-height: 0;
+  opacity: 0.72;
+  @include transition(0.2s);
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .copy-action-icon {
+    color: $theme-primary;
+    vertical-align: middle;
+  }
+}
+
+.contact-us-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  padding-top: clamp(0.35rem, 1.5vw, 0.65rem);
+
+  .social-icons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.85rem, 2.5vw, 1.15rem);
+  }
+
+  .social-icon-link {
+    color: rgba($theme-primary, 0.92);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    padding: 0.25rem;
+    @include transition(0.22s);
+
+    &:hover {
+      color: $theme-secondary;
+      background: none;
+      border: none;
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $theme-primary;
+      outline-offset: 3px;
+      border-radius: $radius-sm;
+    }
+  }
+
+  .social-icon {
+    width: clamp(1.2rem, 3.5vw, 1.35rem);
+    height: clamp(1.2rem, 3.5vw, 1.35rem);
+  }
+
+  .social-icons-small .social-icon {
+    width: clamp(1.2rem, 3.5vw, 1.35rem);
+    height: clamp(1.2rem, 3.5vw, 1.35rem);
+  }
+}
+
+@media (max-width: 575px) {
+  .contact-us-hero,
+  .contact-us-body,
+  .contact-us-name {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .contact-us-connect {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .contact-us-hero__title {
+    font-size: 1.55rem;
+  }
+
+  .contact-us-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+  }
+}

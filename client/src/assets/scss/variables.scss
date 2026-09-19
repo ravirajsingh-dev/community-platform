@@ -1,0 +1,374 @@
+@use "sass:map";
+@use "sass:color";
+
+// =============================================================================
+// SINGLE SOURCE OF TRUTH — multi-theme tokens
+// Swap $active-theme to restyle the app at build time.
+// Available: $theme-executive | $theme-rsf | $theme-rsf-light
+// =============================================================================
+
+$white: #ffffff;
+$black: #000000;
+
+$success-green: #27ae60;
+$warning-orange: #e67e22;
+$brand-youtube: #ff0000;
+
+$futurabook: inherit;
+$cerebri-semi: inherit;
+
+// Raw palette (only place with fixed hex for brand colors)
+$luxury-bg-primary: #010617;
+$luxury-bg-secondary: #000000;
+$luxury-surface-card: #1d160c;
+$luxury-surface-highlight: #8b6a37;
+$luxury-primary-gold: #c29e66;
+$luxury-gold-highlight: #d1b58a;
+$luxury-text-main: #f4f4f4;
+$luxury-text-muted: #bdbdbd;
+$luxury-border: rgba($luxury-surface-highlight, 0.35);
+
+$theme-executive: (
+  bg: $luxury-bg-primary,
+  surface: $luxury-surface-card,
+  surface-alt: $luxury-bg-secondary,
+  surface-light: $luxury-surface-highlight,
+  text: $luxury-text-main,
+  heading: $luxury-primary-gold,
+  primary: $luxury-primary-gold,
+  secondary: $luxury-gold-highlight,
+  border: $luxury-border,
+  border-muted: $luxury-border,
+  muted: $luxury-text-muted,
+  hover: rgba($luxury-primary-gold, 0.15),
+  disabled: #afafaf,
+  text-on-primary: $luxury-bg-primary,
+  text-on-surface: $luxury-text-main,
+  text-muted-light: $luxury-text-muted,
+  text-muted-lighter: $luxury-text-muted,
+  bg-light: $luxury-surface-card,
+  bg-very-light: $luxury-surface-highlight,
+  danger: #ef4444,
+  danger-hover: #dc2626,
+  success: $success-green,
+  warning: $warning-orange,
+  overlay-text: $white,
+  brand-youtube: $brand-youtube,
+);
+
+// Raghukul Sevak Foundation — executive + logo blend with subtle green touch
+$rsf-bg-deep: #120f0d;
+$rsf-surface-card: #191715;
+$rsf-surface-alt: #141210;
+$rsf-surface-light: #372f26;
+$rsf-gold-main: $luxury-primary-gold;
+$rsf-gold-soft: $luxury-gold-highlight;
+$rsf-cream: #f5e6c8;
+$rsf-green-touch: #4f8a4d;
+$rsf-maroon-touch: #5a2b24;
+$rsf-text-muted: #bdb39c;
+$rsf-border: rgba($rsf-gold-main, 0.3);
+
+$theme-rsf: (
+  bg: color.mix($rsf-bg-deep, $rsf-green-touch, 92%),
+  surface: color.mix($rsf-surface-card, $warning-orange, 98%),
+  surface-alt: color.mix($rsf-surface-alt, $rsf-maroon-touch, 92%),
+  surface-light: color.mix($rsf-surface-light, $rsf-gold-soft, 92%),
+  text: $rsf-cream,
+  heading: $rsf-gold-main,
+  primary: $rsf-gold-main,
+  secondary: $rsf-gold-soft,
+  border: $rsf-border,
+  border-muted: $rsf-border,
+  muted: $rsf-text-muted,
+  hover: rgba($rsf-gold-main, 0.14),
+  disabled: #93846a,
+  text-on-primary: $rsf-bg-deep,
+  text-on-surface: $rsf-cream,
+  text-muted-light: $rsf-text-muted,
+  text-muted-lighter: $rsf-text-muted,
+  bg-light: $rsf-surface-card,
+  bg-very-light: $rsf-surface-light,
+  danger: #e04e1a,
+  danger-hover: #dc2626,
+  success: $rsf-green-touch,
+  warning: $warning-orange,
+  overlay-text: $white,
+  brand-youtube: $brand-youtube,
+);
+
+// RSF Light — style guide: red + gold + cream + deep brown
+$rsf-light-red: #b72c1b;
+$rsf-light-gold: #d4a017;
+$rsf-light-cream: #fff4e1;
+$rsf-light-brown: #4b2e12;
+$rsf-light-white: #ffffff;
+$rsf-light-muted: color.mix($rsf-light-brown, $rsf-light-cream, 55%);
+$rsf-light-surface-soft: color.mix($rsf-light-cream, $rsf-light-gold, 92%);
+$rsf-light-border: rgba($rsf-light-gold, 0.35);
+
+$theme-rsf-light: (
+  bg: $rsf-light-cream,
+  surface: $rsf-light-white,
+  surface-alt: color.mix($rsf-light-cream, $rsf-light-brown, 94%),
+  surface-light: $rsf-light-surface-soft,
+  text: $rsf-light-brown,
+  heading: $rsf-light-red,
+  primary: $rsf-light-red,
+  secondary: $rsf-light-gold,
+  border: $rsf-light-border,
+  border-muted: rgba($rsf-light-brown, 0.12),
+  muted: $rsf-light-muted,
+  hover: rgba($rsf-light-red, 0.1),
+  disabled: color.mix($rsf-light-brown, $rsf-light-cream, 40%),
+  text-on-primary: $rsf-light-white,
+  text-on-surface: $rsf-light-brown,
+  text-muted-light: $rsf-light-muted,
+  text-muted-lighter: color.mix($rsf-light-muted, $rsf-light-cream, 65%),
+  bg-light: $rsf-light-white,
+  bg-very-light: $rsf-light-surface-soft,
+  danger: $rsf-light-red,
+  danger-hover: color.mix($rsf-light-red, $black, 85%),
+  success: #3d7a45,
+  warning: $rsf-light-gold,
+  overlay-text: $rsf-light-white,
+  brand-youtube: $brand-youtube,
+);
+
+// Switch active theme here: $theme-executive | $theme-rsf | $theme-rsf-light
+$active-theme: $theme-rsf-light;
+
+// Semantic theme tokens (use these in component SCSS — never raw $luxury-*)
+$theme-bg: map.get($active-theme, bg);
+$theme-surface: map.get($active-theme, surface);
+$theme-surface-alt: map.get($active-theme, surface-alt);
+$theme-surface-light: map.get($active-theme, surface-light);
+$theme-text: map.get($active-theme, text);
+$theme-heading: map.get($active-theme, heading);
+$theme-primary: map.get($active-theme, primary);
+$theme-secondary: map.get($active-theme, secondary);
+$theme-border: map.get($active-theme, border);
+$theme-border-muted: map.get($active-theme, border-muted);
+$theme-muted: map.get($active-theme, muted);
+$theme-hover: map.get($active-theme, hover);
+$theme-disabled: map.get($active-theme, disabled);
+$theme-text-on-primary: map.get($active-theme, text-on-primary);
+$theme-text-on-surface: map.get($active-theme, text-on-surface);
+$theme-text-muted-lighter: map.get($active-theme, text-muted-lighter);
+$theme-bg-light: map.get($active-theme, bg-light);
+$theme-danger: map.get($active-theme, danger);
+$theme-danger-hover: map.get($active-theme, danger-hover);
+$theme-success: map.get($active-theme, success);
+$theme-warning: map.get($active-theme, warning);
+$theme-overlay-text: map.get($active-theme, overlay-text);
+$theme-brand-youtube: map.get($active-theme, brand-youtube);
+
+// Derived alpha / surface tokens
+$theme-alpha-faint: rgba($theme-primary, 0.08);
+$theme-alpha-soft: rgba($theme-primary, 0.15);
+$theme-alpha-mid: rgba($theme-primary, 0.25);
+$theme-alpha-strong: rgba($theme-primary, 0.45);
+
+$black-alpha-06: rgba($black, 0.06);
+$black-alpha-18: rgba($black, 0.18);
+$black-alpha-22: rgba($black, 0.22);
+$black-alpha-24: rgba($black, 0.24);
+$black-alpha-25: rgba($black, 0.25);
+$black-alpha-28: rgba($black, 0.28);
+$black-alpha-30: rgba($black, 0.3);
+$black-alpha-32: rgba($black, 0.32);
+$black-alpha-mid: rgba($black, 0.35);
+$black-alpha-45: rgba($black, 0.45);
+$black-alpha-55: rgba($black, 0.55);
+$black-alpha-75: rgba($black, 0.75);
+$black-alpha-deep: rgba($black, 0.95);
+
+$white-alpha-06: rgba($white, 0.06);
+$white-alpha-12: rgba($white, 0.12);
+$white-alpha-20: rgba($white, 0.2);
+$white-alpha-22: rgba($white, 0.22);
+$white-alpha-45: rgba($white, 0.45);
+$white-alpha-85: rgba($white, 0.85);
+
+$overlay-scrim: $black-alpha-45;
+$overlay-scrim-deep: rgba($black, 0.92);
+$overlay-control-bg: $white-alpha-12;
+$overlay-control-bg-hover: $white-alpha-22;
+$image-fade-mask: $black;
+
+$surface-alpha-deep: rgba($theme-surface, 0.96);
+
+$state-danger-soft: rgba($theme-danger, 0.18);
+$state-danger-strong: rgba($theme-danger, 0.5);
+
+$layout-bg-orb-glow: rgba($theme-primary, 0.15);
+$layout-bg-gradient-start: $theme-bg;
+$layout-bg-gradient-end: $theme-surface-alt;
+$home-section-surface-bg: linear-gradient(
+  180deg,
+  $theme-surface-alt 0%,
+  rgba($theme-surface, 0.6) 50%,
+  $theme-bg 100%
+);
+
+// Header bar — soft primary wash over page bg (light red on rsf-light)
+$layout-header-bg: linear-gradient(
+  180deg,
+  color.mix($theme-bg, $theme-primary, 90%) 0%,
+  $theme-bg 100%
+);
+$layout-header-bg-sticky: linear-gradient(
+  180deg,
+  color.mix($theme-surface, $theme-primary, 88%) 0%,
+  color.mix($theme-bg, $theme-primary, 94%) 100%
+);
+$layout-header-nav: $theme-text;
+$layout-header-nav-hover: $theme-primary;
+$layout-header-nav-active: $theme-primary;
+
+// Shared portal content column (header + page shells)
+$portal-content-max-width: 1400px;
+$portal-content-pad-x: clamp(0.75rem, 3vw, 1.5rem);
+
+// =============================================================================
+// BUTTON TOKENS — single source of truth
+// Change these when theming; .btn / .home-btn / .auth-btn / modal CTAs all follow.
+// Do not hardcode primary→secondary gradients in component SCSS.
+// =============================================================================
+$btn-primary-bg: $theme-primary;
+$btn-primary-bg-image: none;
+$btn-primary-bg-hover: color.mix($theme-primary, $black, 88%);
+$btn-primary-bg-image-hover: none;
+$btn-primary-color: $theme-text-on-primary;
+$btn-primary-border: transparent;
+$btn-primary-shadow: 0 4px 14px $theme-alpha-mid;
+$btn-primary-shadow-hover: 0 8px 22px $theme-alpha-strong;
+
+$btn-secondary-bg: $theme-secondary;
+$btn-secondary-bg-hover: color.mix($theme-secondary, $black, 88%);
+$btn-secondary-color: $theme-text;
+$btn-secondary-border: transparent;
+$btn-secondary-shadow: 0 4px 14px rgba($theme-secondary, 0.28);
+
+$btn-outline-bg: transparent;
+$btn-outline-bg-hover: $theme-alpha-soft;
+$btn-outline-border: $theme-primary;
+$btn-outline-border-hover: $theme-primary;
+$btn-outline-color: $theme-primary;
+$btn-outline-color-hover: $theme-primary;
+
+$btn-danger-bg: $theme-danger;
+$btn-danger-bg-hover: $theme-danger-hover;
+$btn-danger-color: $theme-text-on-primary;
+$btn-danger-border: $theme-danger;
+$btn-danger-border-hover: $theme-danger-hover;
+$btn-danger-shadow: 0 4px 14px $state-danger-soft;
+$btn-danger-shadow-hover: 0 4px 16px $state-danger-strong;
+
+$btn-success-bg: $theme-success;
+$btn-success-bg-hover: color.mix($theme-success, $black, 88%);
+$btn-success-color: $theme-text-on-primary;
+
+$btn-warning-bg: $theme-secondary;
+$btn-warning-bg-hover: color.mix($theme-secondary, $black, 88%);
+$btn-warning-color: $theme-text;
+
+$btn-link-color: $theme-primary;
+$btn-link-color-hover: color.mix($theme-primary, $black, 85%);
+
+$btn-soft-bg: rgba($theme-surface-light, 0.62);
+$btn-soft-bg-hover: rgba($theme-primary, 0.14);
+$btn-soft-border: $theme-alpha-strong;
+$btn-soft-color: $theme-text;
+$btn-soft-color-hover: $theme-heading;
+
+$btn-ghost-bg: rgba($theme-bg, 0.45);
+$btn-ghost-bg-hover: $theme-alpha-soft;
+$btn-ghost-border: $theme-alpha-mid;
+$btn-ghost-color: $theme-text;
+$btn-ghost-color-hover: $theme-primary;
+
+$btn-disabled-bg: $theme-disabled;
+$btn-disabled-color: $theme-text-on-surface;
+$btn-disabled-theme-bg: rgba($theme-primary, 0.18);
+$btn-disabled-theme-border: rgba($theme-primary, 0.28);
+$btn-disabled-theme-color: rgba($theme-heading, 0.55);
+
+// Bootstrap CSS custom properties (consumed by bootstrap.min.css)
+@function color-rgb-csv($value) {
+  @return "#{color.channel($value, "red", $space: rgb)}, #{color.channel($value, "green", $space: rgb)}, #{color.channel($value, "blue", $space: rgb)}";
+}
+
+$bs-primary-rgb: color-rgb-csv($theme-primary);
+$bs-secondary-rgb: color-rgb-csv($theme-secondary);
+$bs-success-rgb: color-rgb-csv($theme-success);
+$bs-warning-rgb: color-rgb-csv($theme-warning);
+$bs-danger-rgb: color-rgb-csv($theme-danger);
+$bs-body-bg-rgb: color-rgb-csv($theme-bg);
+$bs-body-color-rgb: color-rgb-csv($theme-text);
+
+// =============================================================================
+// SPACING, RADIUS, SHADOWS
+// =============================================================================
+
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+
+// Shared field metrics — inputs, selects, CustomSelect
+$form-field-height: 46px;
+$form-field-padding-x: 0.875rem;
+$form-field-font-size: 1rem;
+$form-field-font-weight: 600;
+$form-field-line-height: 1.35;
+$form-field-bg: $theme-surface;
+$form-field-border: $theme-alpha-mid;
+$form-field-border-hover: $theme-alpha-strong;
+$form-field-bg-disabled: rgba($theme-surface-light, 0.2);
+$form-field-border-disabled: rgba($theme-primary, 0.14);
+$form-field-text-disabled: rgba($theme-muted, 0.92);
+
+$shadow-md:
+  0 4px 6px -1px $black-alpha-22,
+  0 2px 4px -1px $black-alpha-06;
+$shadow-card: 0 12px 28px $black-alpha-22;
+$shadow-card-lg: 0 16px 36px $black-alpha-28;
+$shadow-dropdown: 0 10px 24px $black-alpha-32;
+$shadow-control: 0 6px 16px $black-alpha-18;
+$shadow-control-sm: 0 4px 12px $black-alpha-mid;
+$shadow-control-xs: 0 3px 12px $black-alpha-24;
+$shadow-tab: 0 1px 3px $black-alpha-25;
+$shadow-breadcrumb: 0 14px 32px $black-alpha-30;
+$shadow-profile: 0 4px 16px $black-alpha-28;
+$shadow-inset-highlight: inset 0 1px 0 $white-alpha-06;
+$shadow-inset-highlight-strong: inset 0 1px 0 $white-alpha-20;
+
+// Third-party library tokens
+$toastify-color-success: $theme-success;
+$toastify-color-error: $theme-danger;
+$toastify-color-warning: $theme-warning;
+$toastify-color-info: $theme-secondary;
+$toastify-color-light: $theme-surface;
+$toastify-color-dark: $theme-bg;
+$toastify-text-color-light: $theme-text-on-surface;
+$toastify-text-color-dark: $theme-text;
+
+$skeleton-base: rgba($theme-surface-light, 0.35);
+$skeleton-highlight: rgba($theme-primary, 0.22);
+
+$placeholder-bg: rgba($theme-surface-light, 0.42);
+$placeholder-glow-bg: rgba($theme-primary, 0.18);
+$placeholder-glow-opacity: 0.55;
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+$xs: "(max-width: 767px)";

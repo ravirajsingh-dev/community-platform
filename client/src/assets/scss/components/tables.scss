@@ -1,0 +1,266 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.rdt_Table {
+  background: $theme-surface !important;
+  color: $theme-text !important;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba($theme-primary, 0.16);
+}
+
+.common-panel-card .card-body,
+.common-panel-card .card-body *,
+.rdt_TableWrapper,
+.rdt_TableWrapper *,
+.rdt_Table,
+.rdt_TableBody,
+.rdt_TableHead,
+.rdt_TableRow,
+.rdt_TableBody > div,
+.rdt_Table > div {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($theme-primary, 0.42) rgba($theme-bg, 0.34);
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba($theme-bg, 0.34);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      rgba($theme-secondary, 0.62) 0%,
+      rgba($theme-primary, 0.38) 100%
+    );
+  }
+}
+
+.rdt_TableHead {
+  background: linear-gradient(
+    120deg,
+    rgba($theme-primary, 0.16) 0%,
+    rgba($theme-bg, 0.45) 100%
+  ) !important;
+  border-bottom: 1px solid rgba($theme-primary, 0.22);
+}
+
+.rdt_TableHeadRow {
+  min-height: 52px !important;
+  background: transparent !important;
+  color: $theme-heading !important;
+  border-bottom: 0 !important;
+}
+
+.rdt_TableCol {
+  color: $theme-heading !important;
+  font-weight: 700;
+  font-size: 0.87rem;
+  letter-spacing: 0.015em;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  line-height: 1.25;
+  padding: 0.85rem 1rem;
+}
+
+.rdt_TableCol_Sortable {
+  color: $theme-heading !important;
+  gap: 0.35rem;
+
+  &:hover {
+    color: $theme-primary !important;
+  }
+}
+
+.rdt_TableBody {
+  background: $theme-surface !important;
+}
+
+.rdt_TableRow {
+  min-height: 52px !important;
+  background: $theme-surface !important;
+  color: $theme-text !important;
+  border-bottom: 1px solid rgba($theme-primary, 0.12) !important;
+  transition: background-color 0.18s ease;
+
+  &:hover {
+    background: rgba($theme-primary, 0.08) !important;
+  }
+
+  .rdt_TableCell {
+    padding: 0.85rem 1rem;
+    color: $theme-text !important;
+    font-size: 0.9rem;
+  }
+}
+
+.rdt_TableCell {
+  color: $theme-text !important;
+  font-size: 0.9rem;
+}
+
+// Data table row selection checkboxes (react-data-table-component)
+.rdt_TableWrapper input[type="checkbox"],
+.rdt_Table input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: $radius-sm;
+  border: 2px solid rgba($theme-primary, 0.42) !important;
+  background-color: $form-field-bg !important;
+  accent-color: $theme-primary;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: rgba($theme-primary, 0.65) !important;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: rgba($theme-primary, 0.65) !important;
+    box-shadow: 0 0 0 0.2rem $theme-alpha-mid !important;
+  }
+
+  &:checked {
+    background-color: $theme-primary !important;
+    border-color: $theme-primary !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{color-to-url($theme-text-on-primary)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.85rem;
+  }
+
+  &:indeterminate {
+    background-color: rgba($theme-primary, 0.55) !important;
+    border-color: $theme-primary !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='#{color-to-url($theme-text-on-primary)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5 10h10'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.85rem;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.rdt_Pagination {
+  background: transparent !important;
+  color: $theme-text !important;
+  border-top: 0 !important;
+  justify-content: center !important;
+}
+
+.rdt_Progress {
+  background: $theme-surface !important;
+  background-color: $theme-surface !important;
+  color: $theme-text !important;
+}
+
+.common-panel-card,
+.entity-table-card {
+  .rdt_TableWrapper,
+  .rdt_Table,
+  .rdt_TableBody,
+  .rdt_TableHead {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+}
+
+.entity-table-card {
+  .rdt_Table {
+    border-radius: 0;
+    border: none;
+    background: transparent !important;
+  }
+
+  .rdt_TableHead {
+    background: rgba($theme-bg, 0.55) !important;
+    border-bottom: 1px solid rgba($theme-primary, 0.18);
+
+    .rdt_TableHeadRow {
+      min-height: 48px;
+    }
+
+    .rdt_TableCol {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  .rdt_TableBody .rdt_TableRow {
+    background: transparent !important;
+    border-bottom: 1px solid rgba($theme-primary, 0.1);
+
+    &:hover {
+      background: rgba($theme-primary, 0.06) !important;
+    }
+  }
+
+  .rdt_Pagination {
+    border-top: 1px solid rgba($theme-primary, 0.14);
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+}
+
+.bouncing-loader-container.data-table-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  background: $theme-surface !important;
+  background-color: $theme-surface !important;
+  color: $theme-text !important;
+}
+
+.table {
+  color: $theme-text;
+
+  thead th {
+    background: rgba($theme-bg, 0.55);
+    color: $theme-heading;
+    border-bottom: 1px solid rgba($theme-primary, 0.18);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba($theme-primary, 0.1);
+
+    &:hover {
+      background: rgba($theme-primary, 0.06);
+    }
+
+    td {
+      color: $theme-text;
+    }
+  }
+}
+
+.hierarchy-status-badge--pending {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+}

@@ -1,0 +1,100 @@
+@use "../variables" as *;
+
+.legal-content-page {
+  color: $theme-text-on-surface;
+  min-height: 60vh;
+}
+
+.legal-content-page-inner {
+  max-width: 52rem;
+}
+
+.legal-content-page-header {
+  .legal-content-page-title {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  &--centered {
+    text-align: center;
+  }
+}
+
+.legal-content-page-title {
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  color: $theme-heading;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.legal-content-page-intro {
+  max-width: 42rem;
+  margin: 0 auto 1.5rem;
+  color: rgba($theme-text, 0.88);
+  font-size: 1.05rem;
+  line-height: 1.7;
+
+  p {
+    margin: 0 0 0.75rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.legal-content-section:last-child {
+  margin-bottom: 0 !important;
+}
+
+.legal-content-section-heading {
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  color: $theme-heading;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  line-height: 1.3;
+}
+
+.legal-content-body > .legal-content-section:first-child .legal-content-section-heading {
+  margin-top: 0;
+}
+
+.legal-content-body {
+  color: rgba($theme-text, 0.9);
+  font-size: 1rem;
+  line-height: 1.7;
+
+  h2,
+  h3,
+  h4 {
+    color: $theme-heading;
+    font-weight: 600;
+    margin-top: 1.75rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  }
+
+  h3 {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+  }
+
+  h4 {
+    font-size: 1.05rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1rem;
+    padding-left: 1.35rem;
+  }
+}

@@ -1,0 +1,302 @@
+@use "../variables" as *;
+
+// ============================================
+// BUTTONS
+// ============================================
+
+.btn {
+  border-radius: $radius-md;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  transition: all 0.2s ease;
+  font-size: 0.9375rem;
+  border: none;
+
+  &:focus {
+    box-shadow: 0 0 0 3px $theme-alpha-soft;
+  }
+}
+
+.btn-primary {
+  background-color: $btn-primary-bg !important;
+  background-image: none !important;
+  border-color: transparent !important;
+  color: $btn-primary-color !important;
+  box-shadow: $btn-primary-shadow;
+
+  &:hover:not(:disabled):not(.disabled),
+  &:focus:not(:disabled):not(.disabled) {
+    background-color: $btn-primary-bg-hover !important;
+    background-image: none !important;
+    box-shadow: $btn-primary-shadow-hover;
+    transform: translateY(-1px);
+    border-color: transparent !important;
+    color: $btn-primary-color !important;
+  }
+
+  &:disabled,
+  &.disabled {
+    background-color: $theme-disabled !important;
+    background-image: none !important;
+    border-color: transparent !important;
+    color: $theme-text-on-surface !important;
+    box-shadow: none;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  background: rgba($theme-surface-light, 0.62) !important;
+  border-color: $theme-alpha-strong !important;
+  color: $theme-text !important;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background: rgba($theme-primary, 0.14) !important;
+    color: $theme-heading !important;
+  }
+}
+
+.btn-outline-primary {
+  background-color: transparent !important;
+  border-color: $btn-outline-border !important;
+  color: $btn-outline-color !important;
+
+  &:hover,
+  &:focus {
+    background-color: $btn-outline-bg-hover !important;
+    border-color: $btn-outline-border !important;
+    color: $btn-outline-color !important;
+  }
+}
+
+.btn-outline-secondary {
+  background-color: transparent;
+  color: $theme-text;
+  border: 1px solid $theme-border;
+
+  &:hover {
+    background-color: $theme-hover;
+    color: $theme-heading;
+    border-color: $theme-alpha-mid;
+  }
+}
+
+.btn-warning {
+  background: $theme-secondary !important;
+  border-color: transparent !important;
+  color: $theme-text !important;
+}
+
+.btn-danger {
+  background-color: $theme-danger;
+  color: $btn-danger-color;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: $theme-danger-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-success {
+  background-color: $theme-success;
+  color: $btn-success-color;
+
+  &:hover:not(:disabled):not(.disabled) {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+.btn-sm {
+  min-height: 36px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.btn-auth-default {
+  background-color: $btn-primary-bg;
+  background-image: none;
+  border: none;
+  width: 50%;
+  padding: $spacing-sm 0;
+  border-radius: $radius-lg;
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: $btn-primary-color;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $btn-primary-bg-hover;
+    background-image: none;
+    border: none !important;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Portal layout buttons (rajwada-style)
+.btn-group-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn--theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: $btn-primary-bg !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  color: $btn-primary-color !important;
+  box-shadow: $btn-primary-shadow;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    filter 0.2s ease;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: $btn-primary-bg-hover !important;
+    background-image: none !important;
+    box-shadow: $btn-primary-shadow-hover;
+    transform: translateY(-1px);
+  }
+}
+
+.btn--outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: transparent;
+  border: 1px solid $btn-outline-border !important;
+  color: $btn-outline-color;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: $btn-outline-bg-hover;
+    border-color: $btn-outline-border !important;
+    color: $btn-outline-color;
+    transform: translateY(-1px);
+  }
+}
+
+.btn--danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: $theme-danger;
+  border: 1px solid $theme-danger !important;
+  color: $btn-danger-color;
+  cursor: pointer;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: $theme-danger-hover;
+    border-color: $theme-danger-hover !important;
+    box-shadow: 0 4px 16px $state-danger-soft;
+    transform: translateY(-1px);
+  }
+}
+
+// Reject actions in tables/modals (danger theme).
+.btn--reject {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  background-color: $theme-danger !important;
+  background-image: none !important;
+  border: 1px solid $theme-danger !important;
+  color: $btn-danger-color !important;
+  box-shadow: 0 4px 14px $state-danger-soft;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover:not(:disabled):not(.disabled) {
+    background-color: $theme-danger-hover !important;
+    border-color: $theme-danger-hover !important;
+    box-shadow: 0 4px 16px $state-danger-strong;
+    transform: translateY(-1px);
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.btn.btn-sm.btn--reject,
+.btn--reject.btn-sm {
+  min-height: 36px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.btn--disabled-theme {
+  &:disabled,
+  &.disabled {
+    opacity: 1;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    border-color: rgba($theme-muted, 0.35);
+    background: rgba($theme-muted, 0.2);
+    color: rgba($theme-heading, 0.62);
+  }
+}
+
+.btn--link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  min-height: auto;
+  color: $btn-link-color;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: $btn-link-color-hover;
+    text-decoration: none;
+  }
+}

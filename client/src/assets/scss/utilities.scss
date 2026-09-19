@@ -1,0 +1,270 @@
+@use "variables" as *;
+
+.bg-primary {
+  background: linear-gradient(
+    120deg,
+    rgba($theme-primary, 0.12) 0%,
+    rgba($theme-bg, 0.35) 100%
+  ) !important;
+  color: $theme-heading !important;
+}
+
+.text-success {
+  color: $theme-success !important;
+}
+
+.bg-light {
+  background-color: $theme-bg-light !important;
+  color: $theme-text !important;
+}
+
+.text-warning {
+  color: $theme-warning !important;
+}
+
+.text-info {
+  color: $theme-secondary !important;
+}
+
+.bg-dark {
+  background-color: $theme-bg !important;
+  color: $theme-text-on-surface !important;
+}
+
+.text-white {
+  color: $theme-text-on-surface !important;
+}
+
+.text-dark {
+  color: $theme-text !important;
+}
+
+.text-danger {
+  color: $theme-danger !important;
+}
+
+.text-muted {
+  color: $theme-muted !important;
+}
+
+.text-primary {
+  color: $theme-primary !important;
+}
+
+.border-success {
+  border-color: rgba($theme-success, 0.45) !important;
+}
+
+.border-warning {
+  border-color: rgba($theme-warning, 0.45) !important;
+}
+
+.border-danger {
+  border-color: rgba($theme-danger, 0.45) !important;
+}
+
+.text-secondary {
+  color: $theme-secondary !important;
+}
+
+.text-uppercase-input {
+  text-transform: uppercase;
+}
+
+.monospace-input {
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Fira Mono",
+    "Droid Sans Mono", "Source Code Pro", monospace;
+  font-size: 0.875rem;
+}
+
+.ecom-pagination {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.85rem;
+  padding: 0.8rem 0.5rem 0.2rem;
+  background: transparent;
+  border: 0;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  &__page-size {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+  }
+
+  &__label,
+  &__summary {
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  &__label {
+    color: $theme-heading;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  &__summary {
+    color: $theme-heading;
+    font-size: 1rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+  }
+
+  &__size-toggle {
+    min-width: 56px;
+    height: 32px;
+    border: 1px solid rgba($theme-primary, 0.34);
+    border-radius: 11px;
+    background: linear-gradient(
+      145deg,
+      rgba($theme-primary, 0.2) 0%,
+      rgba($theme-bg, 0.6) 100%
+    );
+    color: $theme-heading;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.16rem 0.58rem;
+    box-shadow: none !important;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: rgba($theme-secondary, 0.7);
+      background: rgba($theme-primary, 0.28) !important;
+      color: $theme-secondary;
+      box-shadow: 0 0 0 2px rgba($theme-primary, 0.14) !important;
+      transform: none;
+    }
+
+    &::after {
+      display: none !important;
+    }
+  }
+
+  &__size-menu {
+    min-width: 100%;
+    border: 1px solid rgba($theme-primary, 0.28);
+    border-radius: 10px;
+    background: rgba($theme-surface, 0.98);
+    padding: 0.25rem;
+    box-shadow: $shadow-dropdown;
+  }
+
+  &__size-item {
+    border-radius: 7px;
+    color: $theme-text;
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    &:hover,
+    &:focus {
+      background: rgba($theme-primary, 0.14);
+      color: $theme-heading;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba($theme-primary, 0.45) transparent;
+  }
+
+  &__list {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.44rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: max-content;
+  }
+
+  &__page,
+  &__nav {
+    min-width: 32px;
+    height: 32px;
+    border: 1px solid rgba($theme-primary, 0.24);
+    border-radius: 10px;
+    background: rgba($theme-surface-light, 0.62);
+    color: rgba($theme-text, 0.94);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover:not(:disabled) {
+      border-color: rgba($theme-secondary, 0.6);
+      color: $theme-secondary;
+      background: rgba($theme-primary, 0.2);
+      box-shadow: $shadow-control-xs;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  &__nav svg {
+    font-size: 0.94rem;
+  }
+
+  &__page.is-active {
+    border-color: rgba($theme-secondary, 0.84);
+    color: $theme-text-on-primary;
+    background: linear-gradient(
+      160deg,
+      rgba($theme-secondary, 0.95) 0%,
+      rgba($theme-primary, 0.84) 100%
+    );
+    box-shadow:
+      0 8px 18px rgba($theme-primary, 0.2),
+      $shadow-inset-highlight-strong;
+  }
+
+  &__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    color: rgba($theme-muted, 0.9);
+    font-weight: 700;
+  }
+}
+
+.icon--muted {
+  opacity: 0.6;
+}

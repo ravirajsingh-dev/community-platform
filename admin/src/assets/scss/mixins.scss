@@ -1,0 +1,14 @@
+@use "sass:string";
+
+// Encode a Sass color as %23RRGGBB for use inside SVG data-URI strings.
+@function color-to-url($value) {
+  @return "%23" + string.slice(#{$value}, 2);
+}
+
+@mixin transition($time) {
+  -webkit-transition: all $time ease-out 0s;
+  -moz-transition: all $time ease-out 0s;
+  -ms-transition: all $time ease-out 0s;
+  -o-transition: all $time ease-out 0s;
+  transition: all $time ease-out 0s;
+}

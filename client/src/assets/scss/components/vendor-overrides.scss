@@ -1,0 +1,47 @@
+@use "../variables" as *;
+
+// -----------------------------------------------------------------------------
+// react-toastify
+// -----------------------------------------------------------------------------
+:root {
+  --toastify-color-light: #{$toastify-color-light};
+  --toastify-color-dark: #{$toastify-color-dark};
+  --toastify-color-info: #{$toastify-color-info};
+  --toastify-color-success: #{$toastify-color-success};
+  --toastify-color-warning: #{$toastify-color-warning};
+  --toastify-color-error: #{$toastify-color-error};
+  --toastify-text-color-light: #{$toastify-text-color-light};
+  --toastify-text-color-dark: #{$toastify-text-color-dark};
+  --toastify-icon-color-info: var(--toastify-color-info);
+  --toastify-icon-color-success: var(--toastify-color-success);
+  --toastify-icon-color-warning: var(--toastify-color-warning);
+  --toastify-icon-color-error: var(--toastify-color-error);
+}
+
+// -----------------------------------------------------------------------------
+// react-loading-skeleton
+// -----------------------------------------------------------------------------
+.react-loading-skeleton,
+span > .react-loading-skeleton {
+  --base-color: #{$skeleton-base};
+  --highlight-color: #{$skeleton-highlight};
+}
+
+// -----------------------------------------------------------------------------
+// Bootstrap placeholder shimmer
+// -----------------------------------------------------------------------------
+.placeholder {
+  background-color: $placeholder-bg !important;
+  opacity: 1;
+}
+
+@keyframes theme-placeholder-glow {
+  50% {
+    opacity: $placeholder-glow-opacity;
+    background-color: $placeholder-glow-bg !important;
+  }
+}
+
+.placeholder-glow .placeholder {
+  animation: theme-placeholder-glow 2s ease-in-out infinite;
+}

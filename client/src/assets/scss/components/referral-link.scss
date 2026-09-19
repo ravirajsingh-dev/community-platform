@@ -1,0 +1,131 @@
+@use "../variables" as *;
+
+.referral-link-box {
+  border: 1px solid rgba($theme-primary, 0.2);
+  border-radius: 12px;
+  padding: 0.9rem 1.15rem;
+  background: rgba($theme-surface, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  min-width: 0;
+  width: 100%;
+
+  &--compact {
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+
+    .referral-link-box__header {
+      margin-bottom: 0.55rem;
+    }
+
+    .referral-link-box__title {
+      font-size: 0.95rem;
+    }
+
+    .referral-link-box__row {
+      padding: 0.55rem 0.7rem;
+    }
+
+    .referral-link-box__url {
+      font-size: 0.78rem;
+    }
+  }
+
+  &__header {
+    margin-bottom: 0.75rem;
+  }
+
+  &__title {
+    margin: 0 0 0.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-weight: 700;
+    color: $theme-heading;
+    line-height: 1.3;
+
+    svg {
+      flex-shrink: 0;
+      font-size: 0.9rem;
+      color: $theme-secondary;
+      opacity: 0.9;
+    }
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 0.85rem;
+    color: $theme-muted;
+    line-height: 1.4;
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    min-width: 0;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid rgba($theme-primary, 0.18);
+    border-radius: 8px;
+    background: rgba($theme-bg, 0.45);
+  }
+
+  &__url {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: clamp(0.75rem, 2.6vw, 0.82rem);
+    font-weight: 600;
+    line-height: 1.45;
+    color: $theme-secondary;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  &__copy {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: $theme-secondary;
+    padding: 0.2rem;
+    margin-top: 0.05rem;
+    border-radius: 6px;
+    min-width: 2rem;
+    min-height: 2rem;
+
+    .copy-action-icon {
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+
+    &:hover .copy-action-icon,
+    &:focus-visible .copy-action-icon {
+      color: $theme-primary;
+      transform: scale(1.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba($theme-primary, 0.45);
+      outline-offset: 1px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .referral-link-box {
+    &__row {
+      align-items: center;
+    }
+
+    &__url {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+@use "sass:string";
+@use "./variables" as *;
+
+// Encode a Sass color as %23RRGGBB for use inside SVG data-URI strings.
+@function color-to-url($value) {
+  @return "%23" + string.slice(#{$value}, 2);
+}
+
+@mixin transition($time) {
+  -webkit-transition: all $time ease-out 0s;
+  -moz-transition: all $time ease-out 0s;
+  -ms-transition: all $time ease-out 0s;
+  -o-transition: all $time ease-out 0s;
+  transition: all $time ease-out 0s;
+}
+
+// -----------------------------------------------------------------------------
+// Button surfaces — always use these (tokens live in variables.scss)
+// -----------------------------------------------------------------------------
+
+@mixin btn-primary-surface {
+  background-color: $btn-primary-bg !important;
+  background-image: $btn-primary-bg-image !important;
+  border-color: $btn-primary-border !important;
+  color: $btn-primary-color !important;
+  box-shadow: $btn-primary-shadow;
+}
+
+@mixin btn-primary-surface-hover {
+  background-color: $btn-primary-bg-hover !important;
+  background-image: $btn-primary-bg-image-hover !important;
+  border-color: $btn-primary-border !important;
+  color: $btn-primary-color !important;
+  box-shadow: $btn-primary-shadow-hover;
+}
+
+@mixin btn-primary-surface-plain {
+  background-color: $btn-primary-bg;
+  background-image: $btn-primary-bg-image;
+  border-color: $btn-primary-border;
+  color: $btn-primary-color;
+  box-shadow: $btn-primary-shadow;
+}
+
+@mixin btn-primary-surface-plain-hover {
+  background-color: $btn-primary-bg-hover;
+  background-image: $btn-primary-bg-image-hover;
+  border-color: $btn-primary-border;
+  color: $btn-primary-color;
+  box-shadow: $btn-primary-shadow-hover;
+}
+
+@mixin btn-secondary-surface {
+  background-color: $btn-secondary-bg !important;
+  background-image: none !important;
+  border-color: $btn-secondary-border !important;
+  color: $btn-secondary-color !important;
+  box-shadow: $btn-secondary-shadow;
+}
+
+@mixin btn-secondary-surface-hover {
+  background-color: $btn-secondary-bg-hover !important;
+  color: $btn-secondary-color !important;
+}
+
+@mixin btn-outline-surface {
+  background-color: $btn-outline-bg;
+  border: 1px solid $btn-outline-border !important;
+  color: $btn-outline-color;
+  box-shadow: none;
+}
+
+@mixin btn-outline-surface-hover {
+  background-color: $btn-outline-bg-hover;
+  border-color: $btn-outline-border-hover !important;
+  color: $btn-outline-color-hover;
+}
+
+@mixin btn-danger-surface {
+  background-color: $btn-danger-bg !important;
+  background-image: none !important;
+  border: 1px solid $btn-danger-border !important;
+  color: $btn-danger-color !important;
+  box-shadow: $btn-danger-shadow;
+}
+
+@mixin btn-danger-surface-hover {
+  background-color: $btn-danger-bg-hover !important;
+  border-color: $btn-danger-border-hover !important;
+  color: $btn-danger-color !important;
+  box-shadow: $btn-danger-shadow-hover;
+}
+
+@mixin btn-soft-surface {
+  background-color: $btn-soft-bg;
+  border: 1px solid $btn-soft-border;
+  color: $btn-soft-color;
+}
+
+@mixin btn-soft-surface-hover {
+  background-color: $btn-soft-bg-hover;
+  color: $btn-soft-color-hover;
+}
+
+@mixin btn-ghost-surface {
+  background: $btn-ghost-bg;
+  border: 1px solid $btn-ghost-border;
+  color: $btn-ghost-color;
+}
+
+@mixin btn-ghost-surface-hover {
+  background: $btn-ghost-bg-hover;
+  color: $btn-ghost-color-hover;
+}
+
+@mixin btn-link-surface {
+  color: $btn-link-color;
+  background: transparent;
+  border: 0;
+}
+
+@mixin btn-link-surface-hover {
+  color: $btn-link-color-hover;
+}

@@ -1,0 +1,76 @@
+@use "../variables" as *;
+
+.auth-container {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 10%, $layout-bg-orb-glow, transparent 45%),
+    radial-gradient(circle at 85% 75%, $layout-bg-orb-glow, transparent 42%),
+    linear-gradient(
+      180deg,
+      $layout-bg-gradient-start 0%,
+      $layout-bg-gradient-end 100%
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-lg;
+}
+
+.auth-login {
+  min-height: 100vh;
+  align-items: center;
+  padding: $spacing-lg 0;
+  justify-content: center;
+
+  .auth-login-card {
+    background: linear-gradient(
+      180deg,
+      rgba($theme-bg, 0.92) 0%,
+      rgba($surface-alpha-deep, 0.96) 100%
+    );
+    border-radius: $radius-xl;
+    box-shadow: $shadow-card;
+    color: $theme-text;
+    padding: $spacing-2xl;
+    border: 1px solid rgba($theme-primary, 0.14);
+    max-width: 500px;
+    width: 100%;
+  }
+}
+
+.registration-form {
+  div {
+    position: relative;
+  }
+}
+
+.auth-lable {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $theme-heading;
+  font-weight: 600;
+  margin-bottom: $spacing-sm;
+  font-size: 0.9375rem;
+}
+
+.auth-lable-icon {
+  color: $theme-primary;
+}
+
+.user-auth-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $theme-heading;
+  margin-bottom: $spacing-lg;
+
+  .secondary-color-border {
+    color: $theme-secondary;
+  }
+}
+
+.remember-me {
+  font-size: 0.875rem;
+  margin: $spacing-xl 0 $spacing-sm 0;
+  color: $theme-muted;
+}

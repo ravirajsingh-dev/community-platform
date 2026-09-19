@@ -1,0 +1,54 @@
+@use "./variables" as *;
+
+.dropdown-menu {
+  background: rgba($theme-surface, 0.98);
+  border: 1px solid rgba($theme-primary, 0.28);
+  color: $theme-text;
+}
+
+.dropdown-item {
+  color: $theme-text;
+
+  &:hover,
+  &:focus {
+    background: rgba($theme-primary, 0.14);
+    color: $theme-heading;
+  }
+}
+
+.nav-tabs .nav-link {
+  color: $theme-muted;
+
+  &:hover {
+    color: $theme-secondary;
+    border-color: rgba($theme-primary, 0.25);
+  }
+
+  &.active {
+    color: $theme-bg;
+    background: linear-gradient(
+      135deg,
+      rgba($theme-primary, 0.88) 0%,
+      rgba($theme-secondary, 0.92) 100%
+    );
+    border-color: rgba($theme-primary, 0.55);
+  }
+}
+
+.alert-info {
+  background: rgba($theme-primary, 0.12);
+  border-color: rgba($theme-primary, 0.28);
+  color: $theme-text;
+}
+
+.page-link {
+  background: rgba($theme-bg, 0.35);
+  border-color: rgba($theme-primary, 0.28);
+  color: $theme-text;
+}
+
+.page-item.active .page-link {
+  background: $btn-primary-bg;
+  border-color: transparent;
+  color: $btn-primary-color;
+}

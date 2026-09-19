@@ -1,0 +1,428 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// COMING SOON — theme-aligned, mobile-first placeholder
+// =============================================================================
+
+@keyframes coming-soon-orb-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes coming-soon-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes coming-soon-dot {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.coming-soon-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(100vh, 900px);
+  min-height: 100dvh;
+  color: $theme-text;
+  background:
+    radial-gradient(
+      ellipse 80% 55% at 50% -10%,
+      rgba($theme-primary, 0.18),
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 100% 100%,
+      rgba($theme-secondary, 0.08),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba($theme-bg, 0.98) 0%,
+      rgba($theme-surface, 0.96) 55%,
+      rgba($theme-bg, 1) 100%
+    );
+  padding:
+    clamp(1.5rem, 5vw, 3rem)
+    clamp(1rem, 4vw, 1.5rem)
+    clamp(2.5rem, 7vw, 4.5rem);
+  -webkit-tap-highlight-color: transparent;
+
+  &__glow {
+    position: absolute;
+    inset: auto;
+    width: min(28rem, 90vw);
+    height: min(28rem, 90vw);
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba($theme-primary, 0.22),
+      transparent 68%
+    );
+    filter: blur(12px);
+    pointer-events: none;
+    z-index: 0;
+    animation: coming-soon-orb-pulse 6s ease-in-out infinite;
+
+    &--secondary {
+      top: auto;
+      bottom: -18%;
+      left: 15%;
+      width: min(22rem, 70vw);
+      height: min(22rem, 70vw);
+      background: radial-gradient(
+        circle,
+        rgba($theme-secondary, 0.12),
+        transparent 70%
+      );
+      animation-delay: 1.4s;
+    }
+  }
+
+  &__shell {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 42rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vw, 3.25rem);
+  }
+
+  &__hero {
+    text-align: center;
+    padding: clamp(0.5rem, 2vw, 1rem) 0 0;
+    animation: coming-soon-rise 0.55s ease-out both;
+  }
+
+  &__orb {
+    position: relative;
+    width: clamp(5.5rem, 18vw, 7rem);
+    height: clamp(5.5rem, 18vw, 7rem);
+    margin: 0 auto clamp(1.25rem, 3.5vw, 1.75rem);
+    display: grid;
+    place-items: center;
+  }
+
+  &__orb-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba($theme-primary, 0.35);
+    box-shadow: 0 0 0 8px rgba($theme-primary, 0.06);
+    animation: coming-soon-orb-pulse 4.5s ease-in-out infinite;
+
+    &--delayed {
+      inset: 10%;
+      border-color: rgba($theme-secondary, 0.28);
+      box-shadow: none;
+      animation-delay: 0.8s;
+    }
+  }
+
+  &__orb-core {
+    position: relative;
+    z-index: 1;
+    width: 58%;
+    height: 58%;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: $theme-text-on-primary;
+    background: linear-gradient(
+      145deg,
+      rgba($theme-primary, 0.95),
+      rgba($theme-secondary, 0.85)
+    );
+    box-shadow:
+      0 10px 28px rgba($theme-primary, 0.28),
+      inset 0 1px 0 rgba($white, 0.25);
+    font-size: clamp(1.35rem, 4vw, 1.7rem);
+    overflow: hidden;
+
+    &--logo {
+      width: 78%;
+      height: 78%;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0.15rem;
+    }
+  }
+
+  &__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 0;
+  }
+
+  &__eyebrow {
+    margin: 0 0 0.65rem;
+    font-size: clamp(0.7rem, 2vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $theme-primary;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(1.85rem, 6.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: $theme-heading;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  &__rule {
+    width: clamp(48px, 14vw, 78px);
+    height: 2px;
+    margin: clamp(1rem, 3vw, 1.35rem) auto;
+    border-radius: 999px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($theme-primary, 0.55),
+      rgba($theme-secondary, 0.7),
+      transparent
+    );
+  }
+
+  &__text {
+    margin: 0 auto;
+    max-width: 34rem;
+    font-size: clamp(0.95rem, 2.4vw, 1.08rem);
+    line-height: 1.75;
+    color: $theme-muted;
+    padding: 0 0.15rem;
+  }
+
+  &__status {
+    list-style: none;
+    margin: clamp(1.25rem, 3.5vw, 1.75rem) 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.65rem 1rem;
+  }
+
+  &__status li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba($theme-primary, 0.22);
+    background: rgba($theme-surface, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: $theme-secondary;
+  }
+
+  &__status-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: $theme-primary;
+    box-shadow: 0 0 0 3px rgba($theme-primary, 0.18);
+    animation: coming-soon-dot 1.8s ease-in-out infinite;
+
+    &--soft {
+      background: $theme-secondary;
+      box-shadow: 0 0 0 3px rgba($theme-secondary, 0.16);
+      animation-delay: 0.45s;
+    }
+  }
+
+  &__actions {
+    margin-top: clamp(1.5rem, 4vw, 2rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 2.75rem;
+    min-width: min(100%, 11.5rem);
+    padding: 0.7rem 1.25rem;
+    text-decoration: none;
+    font-weight: 600;
+
+    &--ghost {
+      background: transparent;
+    }
+  }
+
+  &__more {
+    text-align: center;
+    animation: coming-soon-rise 0.65s ease-out 0.12s both;
+  }
+
+  &__more-title {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.05rem, 3vw, 1.25rem);
+    font-weight: 700;
+    color: $theme-heading;
+    letter-spacing: -0.01em;
+  }
+
+  &__more-lead {
+    margin: 0 auto 1.15rem;
+    max-width: 28rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: $theme-muted;
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    height: 100%;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    padding: 1rem 1.05rem;
+    border-radius: 14px;
+    border: 1px solid rgba($theme-primary, 0.2);
+    background: rgba($theme-surface, 0.62);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($theme-primary, 0.45);
+      background: rgba($theme-surface, 0.82);
+      box-shadow: 0 10px 28px rgba($black, 0.22);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__card-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: $theme-heading;
+    line-height: 1.3;
+  }
+
+  &__card-meta {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $theme-primary;
+  }
+
+  &__card-desc {
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: $theme-muted;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .coming-soon-page {
+    &__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__cta {
+      width: 100%;
+      min-width: 0;
+    }
+
+    &__status {
+      gap: 0.5rem;
+    }
+
+    &__status li {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coming-soon-page {
+    &__glow,
+    &__orb-ring,
+    &__status-dot,
+    &__hero,
+    &__more {
+      animation: none;
+    }
+
+    &__card {
+      transition: none;
+    }
+  }
+}

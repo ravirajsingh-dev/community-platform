@@ -1,0 +1,499 @@
+@use "../variables" as *;
+
+.member-status--verified {
+  color: $theme-success;
+}
+
+.member-status--unverified {
+  color: $theme-danger;
+}
+
+// ============================================
+// PROFILE PAGE STYLES
+// ============================================
+
+.profile-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .profile-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .profile-title {
+      margin-bottom: 0;
+    }
+  }
+
+  // Profile Card Sections
+  .profile-card {
+    background-color: $theme-surface;
+    border: 1px solid rgba($theme-primary, 0.3);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: $shadow-profile;
+    }
+
+    .profile-card-header {
+      background-color: $theme-surface-alt;
+      border-bottom: 2px solid $theme-primary;
+      padding: 1rem 1.5rem;
+
+      .profile-card-title {
+        margin-bottom: 0;
+        color: $theme-primary;
+        font-family: $cerebri-semi;
+        font-size: 18px;
+      }
+    }
+
+    .profile-card-body {
+      padding: 1.5rem;
+    }
+  }
+
+  // Form Controls — invalid/disabled variants (base sizing in forms.scss)
+  .profile-form-control {
+    &.profile-form-control-disabled,
+    &:disabled,
+    &[readonly] {
+      background-color: $form-field-bg-disabled;
+      border-color: $form-field-border-disabled;
+      color: $form-field-text-disabled;
+      cursor: not-allowed;
+    }
+
+    &.profile-form-control-invalid {
+      border-color: rgba($theme-danger, 0.5) !important;
+
+      &:focus {
+        border-color: $theme-danger !important;
+        box-shadow: 0 0 0 0.25rem rgba($theme-danger, 0.2) !important;
+      }
+    }
+  }
+
+  // Form Labels with Icons
+  .profile-form-label {
+    font-family: $cerebri-semi;
+    color: $theme-primary;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .profile-form-label-icon {
+      margin-right: 10px;
+      color: $theme-primary;
+    }
+  }
+
+  // Action Buttons
+  .profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  // Help Text
+  .profile-help-text {
+    font-size: 12px;
+    color: $theme-muted;
+    margin-top: 0.25rem;
+  }
+}
+
+// ============================================
+// MEMBER DETAILS PAGE STYLES (Read-only)
+// ============================================
+
+.member-details-container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  .member-details-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+  }
+
+  .member-loading-spinner {
+    color: $theme-primary;
+  }
+
+  .member-details-error {
+    padding: 1rem;
+    color: $theme-danger;
+    background: $theme-alpha-faint;
+    border-radius: 10px;
+
+    h5 {
+      color: $theme-danger;
+    }
+  }
+
+  .member-details-card {
+    --bs-card-bg: transparent;
+    --bs-card-color: #{$theme-text};
+    --bs-card-border-color: #{$theme-border};
+
+    color: $theme-text;
+    background: transparent;
+    border: 1px solid $theme-border;
+    border-radius: 14px;
+    box-shadow: $shadow-profile;
+
+    > .card-body {
+      padding: 1.25rem;
+    }
+  }
+
+  .member-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .member-details-title {
+      margin-bottom: 0;
+    }
+  }
+
+  .member-hero {
+    padding: 0.25rem 0 1rem;
+    margin-bottom: 0.75rem;
+    color: $theme-text;
+
+    .member-hero-content {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .member-hero-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0.2rem 0 0.75rem;
+
+      h2 {
+        margin: 0;
+        color: $theme-heading;
+        font-size: clamp(1.35rem, 3vw, 1.8rem);
+        line-height: 1.15;
+      }
+    }
+
+    .member-hero-eyebrow {
+      color: $theme-muted;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .member-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, max-content));
+      gap: 0.55rem;
+      color: $theme-muted;
+      font-size: 0.8rem;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        min-width: 0;
+        padding: 0.4rem 0.55rem;
+        background: $theme-alpha-faint;
+        border-radius: 7px;
+        overflow-wrap: anywhere;
+
+        svg {
+          flex: 0 0 auto;
+          color: $theme-primary;
+        }
+      }
+    }
+
+    .member-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex: 0 0 auto;
+      padding: 0.4rem 0.7rem;
+      white-space: nowrap;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+
+      &.is-verified {
+        color: $theme-success;
+        background: rgba($theme-success, 0.1);
+      }
+
+      &.is-unverified {
+        color: $theme-danger;
+        background: rgba($theme-danger, 0.1);
+      }
+    }
+  }
+
+  .member-sections {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .member-detail-section {
+    .member-section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 0;
+
+      h5 {
+        margin: 0;
+        color: $theme-heading;
+        font-family: $cerebri-semi;
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+    }
+
+    .member-section-icon {
+      display: grid;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      color: $theme-primary;
+      background: $theme-alpha-soft;
+      border-radius: 8px;
+    }
+
+    .member-section-line {
+      width: 100%;
+      height: 1px;
+      background: $theme-alpha-mid;
+    }
+
+    .member-section-content {
+      padding: 0.45rem 0 0;
+    }
+  }
+
+  .member-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    height: 100%;
+    min-height: 58px;
+    padding: 0.5rem 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+
+    .member-detail-icon {
+      display: grid;
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      color: $theme-primary;
+      background: $theme-alpha-faint;
+      border-radius: 6px;
+    }
+
+    .member-detail-content {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .member-detail-label {
+      color: $theme-muted;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .member-detail-value {
+      color: $theme-text;
+      font-size: 0.85rem;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+
+      &.is-empty {
+        color: $theme-muted;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+// ============================================
+// RESPONSIVE STYLES
+// ============================================
+
+@media #{$xs} {
+  .profile-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    .profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .profile-title {
+        width: 100%;
+      }
+    }
+
+    .profile-card {
+      .profile-card-header {
+        padding: 0.75rem 1rem;
+
+        .profile-card-title {
+          font-size: 16px;
+        }
+      }
+
+      .profile-card-body {
+        padding: 1rem;
+      }
+    }
+
+    .profile-actions {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .profile-container {
+    .profile-card {
+      .profile-card-body {
+        padding: 1.25rem;
+      }
+    }
+  }
+}
+
+// ============================================
+// MEMBER DETAILS RESPONSIVE STYLES
+// ============================================
+
+@media #{$xs} {
+  .member-details-container {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    .member-details-card {
+      border-radius: 10px;
+
+      > .card-body {
+        padding: 0.8rem;
+      }
+    }
+
+    .member-hero {
+      padding: 0.15rem 0 0.8rem;
+
+      .member-hero-heading {
+        align-items: flex-start;
+        margin-bottom: 0.65rem;
+
+        h2 {
+          font-size: 1.3rem;
+        }
+      }
+
+      .member-hero-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.4rem;
+
+        span {
+          padding: 0.35rem 0.45rem;
+          font-size: 0.72rem;
+
+          &:last-child {
+            grid-column: 1 / -1;
+          }
+        }
+      }
+
+      .member-verified-badge {
+        padding: 0.35rem 0.55rem;
+        font-size: 0.68rem;
+      }
+    }
+
+    .member-detail-section {
+      .member-section-header {
+        padding: 0.3rem 0;
+
+        h5 {
+          font-size: 0.88rem;
+        }
+      }
+
+      .member-section-content {
+        padding-top: 0.35rem;
+      }
+    }
+
+    .member-detail-item {
+      min-height: auto;
+      gap: 0.45rem;
+      padding: 0.4rem 0;
+
+      .member-detail-icon {
+        flex-basis: 24px;
+        width: 24px;
+        height: 24px;
+      }
+
+      .member-detail-label {
+        font-size: 0.6rem;
+      }
+
+      .member-detail-value {
+        font-size: 0.76rem;
+        line-height: 1.35;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .member-details-container {
+    .member-hero-meta {
+      grid-template-columns: repeat(2, minmax(0, max-content));
+    }
+  }
+}

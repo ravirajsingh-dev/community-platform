@@ -1,0 +1,268 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+$about-text-line-clamp: 7;
+
+// =============================================================================
+// ABOUT US — seamless layout, motion, clamped text with read more
+// =============================================================================
+
+@keyframes home-about-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes home-about-image-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.home-about {
+  position: relative;
+  padding: clamp(2.75rem, 6vw, 5rem) 0;
+  background: $home-section-surface-bg;
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &--embedded {
+    padding: clamp(2.5rem, 5.5vw, 4rem) 0;
+  }
+
+  &__shell {
+    position: relative;
+  }
+
+  &__intro {
+    text-align: center;
+    padding: 0 clamp(0.5rem, 2vw, 1rem) clamp(2rem, 4vw, 3rem);
+  }
+
+  &__intro-line {
+    margin-top: clamp(1rem, 2.5vw, 1.5rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__title {
+    font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: $theme-heading;
+    margin: 0 0 $spacing-md;
+    letter-spacing: -0.02em;
+  }
+
+  &__lead {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    line-height: 1.8;
+    color: $theme-muted;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2rem);
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.75rem, 3.5vw, 3rem);
+    }
+  }
+
+  &__row--reverse {
+    @media (min-width: 768px) {
+      .home-about__media {
+        order: 2;
+      }
+
+      .home-about__copy {
+        order: 1;
+      }
+    }
+  }
+
+  &__row--text-only,
+  &__row--image-only {
+    grid-template-columns: 1fr;
+  }
+
+  &__row--text-only {
+    .home-about__copy {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .home-about__heading-line {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &__media {
+    position: relative;
+    margin: 0;
+    min-height: clamp(240px, 44vw, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.75rem, 2vw, 1.25rem);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 8% 12%;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba($theme-primary, 0.22) 0%,
+        transparent 72%
+      );
+      filter: blur(18px);
+      z-index: 0;
+      animation: home-about-glow-pulse 5s ease-in-out infinite;
+      @include transition(0.5s);
+    }
+
+    img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 100%;
+      height: clamp(240px, 44vw, 320px);
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      border-radius: $radius-lg;
+      filter: drop-shadow(0 16px 36px rgba($theme-surface-alt, 0.75));
+      @include transition(0.55s cubic-bezier(0.22, 1, 0.36, 1));
+    }
+  }
+
+  &__row.is-visible &__media img {
+    animation: home-about-image-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  &__row:hover &__media {
+    &::before {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+
+    img {
+      transform: translateY(-6px) scale(1.03);
+      filter: drop-shadow(0 22px 44px rgba($theme-primary, 0.22));
+    }
+  }
+
+  &__row--image-only {
+    .home-about__media img {
+      height: clamp(260px, 50vw, 400px);
+
+      @media (min-width: 768px) {
+        height: 380px;
+      }
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    min-width: 0;
+  }
+
+  &__heading {
+    font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: $theme-heading;
+    margin: 0;
+  }
+
+  &__heading-line {
+    display: block;
+    width: 56px;
+    height: 3px;
+    margin-top: $spacing-md;
+  }
+
+  &__text {
+    color: $theme-muted;
+    line-height: 1.85;
+    font-size: clamp(0.92rem, 1.8vw, 1rem);
+  }
+
+  &__text-body {
+    display: -webkit-box;
+    -webkit-line-clamp: $about-text-line-clamp;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    p {
+      margin: 0 0 $spacing-md;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .home-about__text--expanded & {
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+  }
+
+  &__read-more {
+    align-self: flex-start;
+    margin-top: $spacing-sm;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: $theme-primary;
+    cursor: pointer;
+    @include transition(0.3s);
+
+    &:hover {
+      color: $theme-secondary;
+      transform: translateX(4px);
+    }
+  }
+
+  &__row--text-only &__read-more {
+    align-self: center;
+  }
+}
+
+.about-us-page {
+  min-height: 40vh;
+  background: $theme-bg;
+}

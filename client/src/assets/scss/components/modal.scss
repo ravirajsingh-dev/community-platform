@@ -1,0 +1,810 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// ============================================
+// MODALS (admin base + client-specific extensions)
+// ============================================
+
+.modal-content {
+  border-radius: $radius-lg;
+  border: 1px solid rgba($theme-primary, 0.14);
+  box-shadow: $shadow-card;
+  background: linear-gradient(
+    180deg,
+    rgba($theme-bg, 0.98) 0%,
+    rgba($surface-alpha-deep, 0.96) 100%
+  );
+  color: $theme-text;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba($theme-primary, 0.14);
+  padding: 1.25rem 1.5rem;
+
+  .modal-title {
+    font-weight: 600;
+    color: $theme-heading;
+    font-size: 1.25rem;
+  }
+
+  .btn-close {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.modal-body {
+  padding: 1.5rem;
+  color: $theme-text;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba($theme-primary, 0.14);
+  padding: 1rem 1.5rem;
+}
+
+.common-modal {
+  .modal-content {
+    background: linear-gradient(
+      180deg,
+      $black-alpha-deep,
+      $surface-alpha-deep
+    ) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid $theme-alpha-strong;
+    color: $theme-text;
+    overflow: hidden;
+  }
+
+  .common-modal-header {
+    position: relative;
+    background-color: $theme-bg;
+    border-bottom: 1px solid $theme-alpha-mid;
+    padding: 1.5rem 3.5rem 1.5rem 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .btn-close {
+      position: absolute;
+      top: 50%;
+      right: 1.15rem;
+      z-index: 2;
+      margin: 0;
+      padding: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+      opacity: 1;
+      transform: translateY(-50%);
+      background-size: 1.35rem;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{color-to-url($theme-primary)}'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+      filter: none;
+
+      &:hover {
+        opacity: 0.75;
+      }
+
+      &:focus {
+        opacity: 1;
+        box-shadow: 0 0 0 0.2rem rgba($theme-primary, 0.35);
+      }
+    }
+  }
+
+  .common-modal-title {
+    color: $theme-primary;
+    font-size: 1.8rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .common-modal-icon {
+    color: $theme-primary;
+    font-size: 2.5rem;
+    line-height: 1;
+
+    &.is-success {
+      color: $theme-success;
+    }
+
+    &.is-warning {
+      color: $theme-warning;
+    }
+
+    &.is-danger {
+      color: $theme-danger;
+    }
+  }
+
+  .common-modal-body {
+    color: $theme-heading;
+    font-size: 1.0625rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: $theme-surface;
+
+    &--start {
+      text-align: left;
+      color: $theme-text;
+    }
+  }
+
+  .common-modal-footer {
+    background: transparent !important;
+    border-top: 1px solid $theme-alpha-mid;
+    padding: 1.25rem 1.5rem 1.5rem;
+
+    .btn {
+      min-height: 3rem;
+    }
+  }
+}
+
+// Logout / auth modals (client)
+.logout-modal {
+  .logout-modal-header {
+    background-color: $theme-bg;
+    text-align: center;
+    border-bottom: 1px solid $theme-alpha-mid;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logout-modal-title {
+    color: $theme-primary;
+    font-size: 1.8rem;
+  }
+
+  .logout-icon {
+    color: $theme-primary;
+    font-size: 2.5rem;
+
+    &.welcome-icon-success {
+      color: $theme-success;
+    }
+  }
+
+  .logout-modal-body {
+    color: $theme-heading;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 1.5rem;
+    background-color: $theme-surface;
+
+    .welcome-credentials-section {
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .welcome-credential-item {
+      margin-bottom: 0.9375rem;
+    }
+
+    .welcome-status-badge {
+      margin-top: 0.9375rem;
+      text-align: center;
+      font-size: 0.875rem;
+      padding: 0.5rem 0.9375rem;
+    }
+  }
+
+  .logout-modal-footer {
+    background-color: $theme-bg;
+    border-top: 1px solid $theme-alpha-mid;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .btn-logout-cancel {
+    @include btn-soft-surface;
+    padding: 0.7rem 1.5rem;
+    border-radius: $radius-md;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      @include btn-soft-surface-hover;
+    }
+  }
+
+  .btn-logout-confirm {
+    @include btn-primary-surface-plain;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: $radius-md;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      @include btn-primary-surface-plain-hover;
+    }
+  }
+}
+
+// Registration welcome modal (client)
+.welcome-modal {
+  .modal-dialog {
+    max-width: 520px;
+  }
+
+  .modal-content {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba($theme-primary, 0.28);
+    box-shadow:
+      0 24px 48px $black-alpha-45,
+      0 0 0 1px rgba($theme-primary, 0.08) inset;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        $theme-primary 35%,
+        $theme-secondary 65%,
+        transparent 100%
+      );
+      z-index: 2;
+    }
+  }
+
+  .common-modal-header {
+    padding: 2rem 1.5rem 1.25rem;
+    border-bottom: none;
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba($theme-primary, 0.18) 0%,
+        transparent 62%
+      ),
+      $theme-bg;
+  }
+
+  .common-modal-title {
+    width: 100%;
+  }
+
+  .common-modal-body.welcome-modal__body {
+    padding: 0 1.5rem 1.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba($theme-surface, 0.55) 0%,
+      rgba($theme-bg, 0.92) 100%
+    );
+    text-align: center;
+  }
+
+  .common-modal-footer {
+    padding: 0 1.5rem 1.5rem;
+    border-top: none;
+    background: rgba($theme-bg, 0.96);
+  }
+
+  &__icon-ring {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: welcome-icon-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 2px solid rgba($theme-primary, 0.35);
+      animation: welcome-ring-pulse 2.4s ease-in-out infinite;
+    }
+
+    &--success {
+      background: radial-gradient(
+        circle,
+        rgba($theme-success, 0.22) 0%,
+        rgba($theme-success, 0.06) 70%
+      );
+
+      &::before {
+        border-color: rgba($theme-success, 0.45);
+      }
+
+      .welcome-modal__icon {
+        color: $theme-success;
+      }
+    }
+
+    &--warning {
+      background: radial-gradient(
+        circle,
+        rgba($theme-warning, 0.22) 0%,
+        rgba($theme-warning, 0.06) 70%
+      );
+
+      &::before {
+        border-color: rgba($theme-warning, 0.45);
+      }
+
+      .welcome-modal__icon {
+        color: $theme-warning;
+      }
+    }
+
+    &--danger {
+      background: radial-gradient(
+        circle,
+        rgba($theme-danger, 0.22) 0%,
+        rgba($theme-danger, 0.06) 70%
+      );
+
+      &::before {
+        border-color: rgba($theme-danger, 0.45);
+      }
+
+      .welcome-modal__icon {
+        color: $theme-danger;
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 2.75rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 12px rgba($theme-primary, 0.25));
+  }
+
+  &__content {
+    animation: welcome-content-rise 0.5s ease 0.12s both;
+  }
+
+  &__title {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: $theme-heading;
+    letter-spacing: 0.01em;
+  }
+
+  &__name {
+    display: inline-block;
+    background: linear-gradient(135deg, $theme-primary, $theme-secondary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    word-break: break-word;
+  }
+
+  &__subtitle {
+    margin: 0 0 0.65rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    line-height: 1.6;
+    color: rgba($theme-text, 0.9);
+
+    strong {
+      color: $theme-secondary;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  &__message {
+    margin: 0 0 1.25rem;
+    font-size: clamp(0.9rem, 2.4vw, 1rem);
+    line-height: 1.65;
+    color: $theme-muted;
+    padding: 0 0.25rem;
+  }
+
+  &__credentials {
+    display: grid;
+    gap: $spacing-sm;
+    margin-bottom: 1.1rem;
+  }
+
+  &__credential-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.85rem 1rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba($theme-primary, 0.2);
+    background: linear-gradient(
+      135deg,
+      rgba($theme-surface-light, 0.18) 0%,
+      rgba($theme-bg, 0.75) 100%
+    );
+    box-shadow: $shadow-inset-highlight;
+    text-align: left;
+  }
+
+  &__credential-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $theme-muted;
+  }
+
+  &__credential-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+    min-width: 0;
+
+    code {
+      flex: 1;
+      min-width: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        monospace;
+      font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+      font-weight: 600;
+      color: $theme-heading;
+      background: transparent;
+      border: none;
+      padding: 0;
+      word-break: break-all;
+    }
+  }
+
+  &__copy {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: $radius-sm;
+    border: 1px solid rgba($theme-primary, 0.28);
+    background: rgba($theme-primary, 0.1);
+    color: $theme-primary;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+
+    .copy-action-icon {
+      color: inherit;
+    }
+
+    &:hover {
+      background: rgba($theme-primary, 0.2);
+      border-color: rgba($theme-primary, 0.45);
+      transform: scale(1.05);
+    }
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin: 0 auto 1rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    &--success {
+      color: $theme-success;
+      background: rgba($theme-success, 0.14);
+      border: 1px solid rgba($theme-success, 0.32);
+    }
+
+    &--warning {
+      color: $theme-warning;
+      background: rgba($theme-warning, 0.14);
+      border: 1px solid rgba($theme-warning, 0.32);
+    }
+
+    &--danger {
+      color: $theme-danger;
+      background: rgba($theme-danger, 0.14);
+      border: 1px solid rgba($theme-danger, 0.32);
+    }
+  }
+
+  &__status-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 8px currentColor;
+    animation: welcome-status-blink 1.8s ease-in-out infinite;
+  }
+
+  &__note {
+    padding: 0.9rem 1rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba($theme-primary, 0.16);
+    background: rgba($theme-primary, 0.06);
+    text-align: left;
+
+    p {
+      margin: 0;
+      font-size: clamp(0.82rem, 2.2vw, 0.9rem);
+      line-height: 1.65;
+      color: rgba($theme-text, 0.82);
+    }
+  }
+
+  &__cta {
+    @include btn-primary-surface;
+    border: none !important;
+    border-radius: $radius-md !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    padding: 0.8rem 1.5rem !important;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease !important;
+
+    &:hover {
+      @include btn-primary-surface-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .modal-dialog {
+      margin: 0.75rem;
+      max-width: calc(100% - 1.5rem);
+    }
+
+    .common-modal-header {
+      padding: 1.5rem 1rem 1rem;
+    }
+
+    .common-modal-body.welcome-modal__body {
+      padding: 0 1rem 1rem;
+    }
+
+    .common-modal-footer {
+      padding: 0 1rem 1rem;
+    }
+
+    &__icon-ring {
+      width: 4.75rem;
+      height: 4.75rem;
+    }
+
+    &__icon {
+      font-size: 2.25rem;
+    }
+
+    &__credential-card {
+      padding: 0.75rem 0.85rem;
+    }
+
+    &__credential-value {
+      flex-wrap: wrap;
+    }
+
+    &__note {
+      padding: 0.75rem 0.85rem;
+    }
+  }
+}
+
+@keyframes welcome-icon-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes welcome-ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 0.65;
+  }
+}
+
+@keyframes welcome-content-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes welcome-status-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+// News details modal (client)
+.news-details-modal {
+  .common-modal-title {
+    color: $theme-primary;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .news-details-modal-body {
+    padding: 1.5rem;
+    color: $theme-text;
+    max-height: 70vh;
+    overflow-y: auto;
+
+    .news-details-title {
+      margin: 0 0 1rem;
+      color: $theme-primary;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+    }
+
+    .news-details-slider {
+      margin-bottom: 1.25rem;
+    }
+
+    .news-details-image-frame {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      border-radius: $radius-md;
+      overflow: hidden;
+      background: rgba($theme-surface-alt, 0.85);
+      box-shadow: $shadow-control-sm;
+    }
+
+    .news-details-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 0.55s ease;
+      pointer-events: none;
+
+      &.is-active {
+        opacity: 1;
+      }
+    }
+
+    .news-details-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      justify-content: center;
+      margin-top: 0.85rem;
+    }
+
+    .news-details-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgba($theme-primary, 0.35);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+
+      &.is-active,
+      &:hover {
+        background: $theme-primary;
+        transform: scale(1.15);
+      }
+    }
+
+    .news-details-content {
+      .news-details-description {
+        color: rgba($theme-text, 0.88);
+        font-size: 1rem;
+        line-height: 1.8;
+        max-height: calc(1.8em * 5);
+        margin-bottom: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        white-space: pre-line;
+        word-wrap: break-word;
+        scrollbar-width: thin;
+        scrollbar-color: rgba($theme-primary, 0.45) transparent;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba($theme-primary, 0.45);
+          border-radius: 999px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .common-modal-title {
+      font-size: 1.15rem;
+    }
+
+    .news-details-modal-body {
+      padding: 1.25rem;
+      max-height: 75vh;
+
+      .news-details-image-frame {
+        height: 240px;
+      }
+
+      .news-details-content .news-details-description {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        max-height: calc(1.7em * 5);
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .common-modal-title {
+      font-size: 1rem;
+    }
+
+    .news-details-modal-body {
+      padding: 1rem;
+      max-height: 80vh;
+
+      .news-details-title {
+        font-size: 0.8rem;
+      }
+
+      .news-details-image-frame {
+        height: 200px;
+      }
+
+      .news-details-content .news-details-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        max-height: calc(1.6em * 5);
+      }
+    }
+  }
+}

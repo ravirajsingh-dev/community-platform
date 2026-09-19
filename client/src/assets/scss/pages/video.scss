@@ -1,0 +1,220 @@
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// HOME VIDEO SECTION
+// =============================================================================
+
+$video-gap: 1.5rem;
+$video-cols-mobile: 2;
+$video-cols-desktop: 3;
+
+.home-video {
+  background: linear-gradient(
+    180deg,
+    $theme-bg 0%,
+    rgba($theme-surface, 0.4) 50%,
+    $theme-bg 100%
+  );
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__viewport {
+    width: 100%;
+    position: relative;
+
+    &.is-scrollable {
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      // Same soft edge fade as Our Gallery
+      mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        $image-fade-mask 8%,
+        $image-fade-mask 92%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        $image-fade-mask 8%,
+        $image-fade-mask 92%,
+        transparent 100%
+      );
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat($video-cols-mobile, 1fr);
+    gap: $video-gap;
+    width: 100%;
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat($video-cols-desktop, 1fr);
+    }
+  }
+
+  &__card {
+    height: 100%;
+    min-width: 0;
+    border-radius: $radius-xl;
+    border: 1px solid $theme-alpha-mid;
+    background: rgba($theme-surface, 0.85);
+    overflow: hidden;
+    @include transition(0.35s);
+
+    &:hover {
+      transform: translateY(-6px);
+      border-color: $theme-alpha-strong;
+      box-shadow: 0 20px 48px rgba($theme-primary, 0.15);
+    }
+  }
+
+  &__frame {
+    position: relative;
+    padding-top: 56.25%;
+    background: $theme-surface-alt;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        to bottom,
+        transparent 70%,
+        rgba($theme-bg, 0.35) 100%
+      );
+      pointer-events: none;
+      opacity: 0;
+      @include transition(0.35s);
+    }
+
+    .home-video__card:hover &::before {
+      opacity: 1;
+    }
+  }
+
+  &__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  // Click-to-play preview — avoids oversized YouTube chrome on small cards
+  &__preview {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: $theme-surface-alt;
+    cursor: pointer;
+    display: block;
+  }
+
+  &__thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__thumb-fallback {
+    position: absolute;
+    inset: 0;
+    background: $theme-surface-alt;
+  }
+
+  &__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    svg {
+      width: clamp(36px, 28%, 68px);
+      height: auto;
+      filter: drop-shadow(0 2px 8px $overlay-scrim);
+      @include transition(0.25s);
+    }
+  }
+
+  &__play-bg {
+    fill: $theme-brand-youtube;
+    fill-opacity: 0.9;
+  }
+
+  &__play-icon {
+    fill: $theme-overlay-text;
+  }
+
+  &__preview:hover .home-video__play svg,
+  &__preview:focus-visible .home-video__play svg {
+    transform: scale(1.06);
+  }
+
+  &__preview:hover .home-video__play-bg,
+  &__preview:focus-visible .home-video__play-bg {
+    fill: $theme-brand-youtube;
+    fill-opacity: 1;
+  }
+
+  &__title {
+    padding: $spacing-md $spacing-lg $spacing-lg;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $theme-heading;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .home-video {
+    &__play svg {
+      width: clamp(28px, 32%, 44px);
+    }
+
+    &__title {
+      padding: $spacing-sm $spacing-md $spacing-md;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-video {
+    &__grid {
+      gap: 1rem;
+    }
+
+    &__play svg {
+      width: 32px;
+    }
+
+    &__title {
+      font-size: 0.85rem;
+    }
+  }
+}

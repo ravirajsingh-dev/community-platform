@@ -1,0 +1,192 @@
+@use "../variables" as *;
+
+.user-profile-card {
+  .user-profile-tabs.nav.nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    border-bottom: 1px solid rgba($theme-primary, 0.32);
+    margin-bottom: 1.25rem !important;
+    padding-bottom: 0.25rem;
+    gap: 0.25rem;
+
+    .nav-item {
+      margin-bottom: 0;
+      flex: 0 0 auto;
+    }
+
+    .nav-link {
+      white-space: nowrap;
+      border: 1px solid transparent;
+      border-radius: 8px 8px 0 0;
+      color: rgba($theme-text-on-surface, 0.75);
+      background: transparent;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.5rem 0.9rem;
+      transition: all 0.2s ease;
+
+      &:hover,
+      &:focus {
+        color: $theme-primary;
+        border-color: $theme-alpha-mid;
+        background: $theme-hover;
+      }
+
+      &.active {
+        color: $theme-bg;
+        border-color: rgba($theme-primary, 0.55);
+        border-bottom-color: transparent;
+        background: linear-gradient(
+          135deg,
+          rgba($theme-primary, 0.88) 0%,
+          rgba($theme-secondary, 0.92) 100%
+        );
+
+        .user-profile-tab-badge {
+          background: rgba($theme-bg, 0.92) !important;
+          color: $theme-primary !important;
+          border-color: rgba($theme-bg, 0.95);
+          box-shadow: $shadow-tab;
+        }
+      }
+
+      &:not(.active) .user-profile-tab-badge {
+        background: rgba($theme-surface-light, 0.55) !important;
+        color: $theme-secondary !important;
+        border-color: rgba($theme-primary, 0.4);
+      }
+    }
+  }
+}
+
+.user-profile-tab-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.user-profile-tab-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  line-height: 1;
+  vertical-align: middle;
+  border: 1px solid transparent;
+}
+
+.wallet-balance-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: stretch;
+  min-width: 0;
+
+  &__balance,
+  &__referral {
+    min-width: 0;
+  }
+
+  &__balance {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.wallet-sub-tabs.nav.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  border-bottom: 1px solid rgba($theme-primary, 0.32);
+  gap: 0.25rem;
+
+  .nav-item {
+    margin-bottom: 0;
+    flex: 0 0 auto;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-radius: 8px 8px 0 0;
+    color: rgba($theme-text-on-surface, 0.75);
+    background: transparent;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.5rem 0.9rem;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus {
+      color: $theme-primary;
+      border-color: $theme-alpha-mid;
+      background: $theme-hover;
+    }
+
+    &.active {
+      color: $theme-bg;
+      border-color: rgba($theme-primary, 0.55);
+      border-bottom-color: transparent;
+      background: linear-gradient(
+        135deg,
+        rgba($theme-primary, 0.88) 0%,
+        rgba($theme-secondary, 0.92) 100%
+      );
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .wallet-balance-row {
+    grid-template-columns: minmax(9rem, 0.85fr) minmax(0, 1.8fr);
+    gap: 1.25rem;
+    align-items: center;
+  }
+}
+
+.wallet-create-user-modal {
+  .auth-form {
+    margin: 0;
+  }
+
+  .auth-actions {
+    margin-top: 0.5rem;
+  }
+}
+
+.wallet-create-plan--unaffordable {
+  opacity: 0.55;
+
+  .membership-plan-card {
+    cursor: not-allowed;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: rgba($theme-primary, 0.15);
+    }
+  }
+}
+
+.my-account-skeleton {
+  &__tab {
+    display: inline-block;
+    width: 7rem;
+    height: 2rem;
+  }
+
+  &__label {
+    height: 0.9rem;
+  }
+
+  &__field {
+    display: block;
+    height: 2.5rem;
+  }
+}

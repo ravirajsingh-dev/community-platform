@@ -1,0 +1,713 @@
+@use "sass:color";
+@use "../variables" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// AUTH PAGES — Login & Register (scratch redesign)
+// =============================================================================
+
+.auth-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.85rem, 3vw, 2rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, $layout-bg-orb-glow, transparent 48%),
+    radial-gradient(circle at 82% 78%, $layout-bg-orb-glow, transparent 44%),
+    linear-gradient(
+      165deg,
+      $layout-bg-gradient-start 0%,
+      $layout-bg-gradient-end 55%,
+      color.mix($layout-bg-gradient-end, $theme-primary, 92%) 100%
+    );
+
+  &__glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(60px);
+    opacity: 0.55;
+
+    &--one {
+      width: clamp(180px, 32vw, 320px);
+      height: clamp(180px, 32vw, 320px);
+      top: -4%;
+      left: -6%;
+      background: rgba($theme-primary, 0.22);
+    }
+
+    &--two {
+      width: clamp(160px, 28vw, 280px);
+      height: clamp(160px, 28vw, 280px);
+      right: -5%;
+      bottom: -6%;
+      background: rgba($theme-secondary, 0.16);
+    }
+  }
+
+  &__card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: $radius-xl;
+    border: 1px solid rgba($theme-primary, 0.24);
+    background: linear-gradient(
+      165deg,
+      rgba($theme-surface, 0.94) 0%,
+      rgba($theme-bg, 0.97) 100%
+    );
+    box-shadow:
+      $shadow-card-lg,
+      0 0 0 1px rgba($theme-primary, 0.06) inset;
+    overflow: hidden;
+    animation: auth-card-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        $theme-primary 40%,
+        $theme-secondary 60%,
+        transparent 100%
+      );
+    }
+
+    &--narrow {
+      max-width: 460px;
+    }
+
+    &--wide {
+      max-width: 920px;
+    }
+  }
+
+  &__header {
+    padding: clamp(1.25rem, 4vw, 1.75rem) clamp(1.1rem, 4vw, 1.75rem) 0;
+    text-align: center;
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba($theme-primary, 0.22);
+    background: rgba($theme-primary, 0.08);
+    color: $theme-muted;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background 0.2s ease;
+
+    &:hover {
+      color: $theme-heading;
+      border-color: rgba($theme-primary, 0.42);
+      background: rgba($theme-primary, 0.14);
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.45rem, 4.5vw, 1.85rem);
+    font-weight: 700;
+    line-height: 1.25;
+    background: linear-gradient(135deg, $theme-heading 0%, $theme-secondary 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+    line-height: 1.55;
+    color: $theme-muted;
+  }
+
+  &__body {
+    padding: clamp(1rem, 3.5vw, 1.5rem) clamp(1.1rem, 4vw, 1.75rem);
+  }
+
+  &__footer {
+    padding: 0.85rem clamp(1.1rem, 4vw, 1.75rem) clamp(1.1rem, 3.5vw, 1.5rem);
+    border-top: 1px solid rgba($theme-primary, 0.12);
+    text-align: center;
+    font-size: 0.9rem;
+    color: $theme-muted;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Form fields
+// -----------------------------------------------------------------------------
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: $theme-heading;
+  }
+
+  &__label-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.35rem;
+    height: 1.35rem;
+    border-radius: $radius-sm;
+    background: rgba($theme-primary, 0.12);
+    color: $theme-primary;
+    flex-shrink: 0;
+  }
+
+  &__required {
+    color: $theme-warning;
+  }
+
+  &__control {
+    width: 100%;
+    min-height: $form-field-height;
+    padding: 0.65rem 0.9rem;
+    border-radius: $radius-md;
+    border: 1px solid rgba($theme-primary, 0.22);
+    background: rgba($theme-bg, 0.65);
+    color: $theme-text;
+    font-size: 0.95rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+
+    &::placeholder {
+      color: rgba($theme-muted, 0.85);
+      opacity: 1;
+    }
+
+    &:hover {
+      border-color: rgba($theme-primary, 0.35);
+    }
+
+    &:focus {
+      border-color: rgba($theme-primary, 0.55);
+      background: rgba($theme-bg, 0.82);
+      box-shadow: 0 0 0 3px rgba($theme-primary, 0.14);
+      color: $theme-text;
+    }
+
+    &.form-input-invalid,
+    &.is-invalid {
+      border-color: rgba($theme-danger, 0.55);
+      box-shadow: 0 0 0 2px rgba($theme-danger, 0.12);
+    }
+  }
+
+  &__hint {
+    margin: 0;
+    font-size: 0.78rem;
+    color: $theme-muted;
+    line-height: 1.4;
+  }
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+
+  .auth-field__control {
+    padding-right: 2.75rem;
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.55rem;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: $radius-sm;
+    background: rgba($theme-primary, 0.1);
+    color: $theme-muted;
+    cursor: pointer;
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+
+    &:hover {
+      color: $theme-heading;
+      background: rgba($theme-primary, 0.2);
+    }
+  }
+}
+
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.auth-checkbox {
+  margin: 0;
+  font-size: 0.84rem;
+  color: $theme-muted;
+
+  .form-check-input {
+    border-color: rgba($theme-primary, 0.35);
+    background-color: rgba($theme-bg, 0.7);
+
+    &:checked {
+      background-color: $theme-primary;
+      border-color: $theme-primary;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($theme-primary, 0.18);
+    }
+  }
+
+  .form-check-label {
+    color: $theme-muted;
+    line-height: 1.4;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------
+
+.auth-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 46px;
+  padding: 0.7rem 1.25rem;
+  border-radius: $radius-lg;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  &--primary {
+    width: 100%;
+    @include btn-primary-surface-plain;
+    border: none;
+
+    &:hover:not(:disabled) {
+      @include btn-primary-surface-plain-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  &--outline {
+    width: 100%;
+    @include btn-outline-surface;
+    background: rgba($theme-surface-light, 0.12);
+    border-color: rgba($theme-primary, 0.32);
+    color: $theme-text;
+
+    &:hover:not(:disabled) {
+      @include btn-outline-surface-hover;
+      color: $theme-heading;
+    }
+  }
+}
+
+.auth-actions {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
+
+  &--split {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+}
+
+.auth-link {
+  @include btn-link-surface;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    @include btn-link-surface-hover;
+  }
+
+  &--muted {
+    padding: 0;
+    border: none;
+    @include btn-link-surface;
+    font-size: 0.84rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      @include btn-link-surface-hover;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Registration stepper — horizontal on all screens
+// -----------------------------------------------------------------------------
+
+.auth-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-bottom: 1.35rem;
+  padding: 0.85rem 0.65rem;
+  border-radius: $radius-lg;
+  border: 1px solid rgba($theme-primary, 0.14);
+  background: rgba($theme-bg, 0.45);
+
+  &__item {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    min-width: 0;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 1rem;
+      left: calc(50% + 1.1rem);
+      width: calc(100% - 2.2rem);
+      height: 2px;
+      background: rgba($theme-primary, 0.2);
+      z-index: 0;
+    }
+
+    &.is-active,
+    &.is-complete {
+      opacity: 1;
+
+      .auth-steps__number {
+        background-color: $btn-primary-bg;
+        background-image: $btn-primary-bg-image;
+        border-color: transparent;
+        color: $btn-primary-color;
+        box-shadow: $btn-primary-shadow;
+      }
+    }
+
+    &.is-complete:not(:last-child)::after {
+      background: linear-gradient(
+        90deg,
+        rgba($theme-primary, 0.55),
+        rgba($theme-secondary, 0.35)
+      );
+    }
+  }
+
+  &__number {
+    position: relative;
+    z-index: 1;
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba($theme-primary, 0.35);
+    background: rgba($theme-bg, 0.85);
+    color: $theme-heading;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: clamp(0.62rem, 2.2vw, 0.74rem);
+    line-height: 1.25;
+    color: $theme-muted;
+    font-weight: 600;
+    max-width: 100%;
+    word-break: break-word;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Membership plans & summary (register flow)
+// -----------------------------------------------------------------------------
+
+.membership-plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: $spacing-md;
+}
+
+.membership-plan-card {
+  cursor: pointer;
+  border: 2px solid rgba($theme-primary, 0.15);
+  border-radius: $radius-lg;
+  background: rgba($theme-bg, 0.55);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba($theme-primary, 0.45);
+    transform: translateY(-2px);
+    box-shadow: $shadow-control-sm;
+  }
+
+  &.is-selected {
+    border-color: $theme-primary;
+    box-shadow:
+      0 0 0 1px rgba($theme-primary, 0.25),
+      $shadow-control-sm;
+    background: rgba($theme-primary, 0.06);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__title {
+    font-size: 1.05rem;
+    margin: 0;
+    color: $theme-heading;
+    font-weight: 700;
+  }
+
+  &__price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $theme-secondary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__duration {
+    font-size: 0.84rem;
+    color: $theme-muted;
+    margin-bottom: 0;
+  }
+}
+
+.registration-summary {
+  border: 1px solid rgba($theme-primary, 0.18);
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  background: rgba($theme-bg, 0.5);
+
+  &__title {
+    font-weight: 700;
+    color: $theme-heading;
+    margin-bottom: $spacing-md;
+    font-size: 0.95rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid rgba($theme-primary, 0.08);
+    font-size: 0.88rem;
+    color: $theme-muted;
+
+    strong {
+      color: $theme-heading;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &--total {
+      font-size: 1rem;
+      padding-top: $spacing-sm;
+      margin-top: $spacing-sm;
+      border-top: 1px dashed rgba($theme-primary, 0.2);
+
+      strong {
+        color: $theme-secondary;
+        font-size: 1.05rem;
+      }
+    }
+  }
+}
+
+.auth-step-intro {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: $theme-muted;
+}
+
+.auth-verify {
+  padding: 1.5rem 0;
+  text-align: center;
+
+  p {
+    margin: 0.75rem 0 0;
+    color: $theme-muted;
+    font-size: 0.9rem;
+  }
+}
+
+// Legacy class aliases — kept for any remaining references
+.auth-container,
+.auth-login,
+.auth-login-card {
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  max-width: none;
+}
+
+@keyframes auth-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Responsive
+// -----------------------------------------------------------------------------
+
+@media #{$xs} {
+  .auth-page {
+    padding: 0.65rem;
+    align-items: flex-start;
+    padding-top: 1rem;
+
+    &__card {
+      border-radius: $radius-lg;
+    }
+
+    &__body {
+      padding: 0.85rem 1rem 1rem;
+    }
+
+    &__header {
+      padding: 1rem 1rem 0;
+    }
+  }
+
+  .auth-steps {
+    padding: 0.65rem 0.35rem;
+    gap: 0.15rem;
+
+    &__number {
+      width: 1.75rem;
+      height: 1.75rem;
+      font-size: 0.72rem;
+    }
+
+    &__item:not(:last-child)::after {
+      top: 0.875rem;
+      left: calc(50% + 0.95rem);
+      width: calc(100% - 1.9rem);
+    }
+  }
+
+  .auth-field__control {
+    font-size: 16px; // prevent iOS zoom
+  }
+
+  .membership-plans-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+
+  .registration-summary {
+    padding: $spacing-sm;
+
+    &__row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+
+      strong {
+        text-align: left;
+      }
+    }
+  }
+
+  .membership-renew-page {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+
+    &__header h1 {
+      font-size: 1.35rem;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .auth-actions--split {
+    grid-template-columns: 1fr;
+  }
+}
