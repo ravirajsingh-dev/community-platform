@@ -52,3 +52,7 @@ SEED_ADMIN_PASSWORD='your-strong-password' node seeds/loadAdmin.js
 ## Security
 
 Secrets live in `.env` (see `.env.example`). Do not commit real API keys, database URIs, payment credentials, or production hosts.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
